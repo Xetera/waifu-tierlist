@@ -1,0 +1,29 @@
+@import "variables";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail {
+  max-width: 50px;
+  min-height: 50px;
+}
+
+.searchResult {
+  display: flex;
+}
+
+.resultsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($search-width, 1fr));
+  grid-gap: 1rem;
+  margin: 10px;
+  width: 100%;
+}
+
+.searchBar {
+  margin: 10px 0;
+}

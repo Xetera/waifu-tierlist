@@ -1,8 +1,13 @@
 import React from "react";
-import Search from "../components/Search";
+import { Home } from "../components/Home";
+import Head from "next/head";
+import "../layouts/globalStyle.scss";
 
 export default () => (
   <>
-    <Search />
+    <Head>
+      <title>Waifu Tierlist</title>
+    </Head>
+    <Home />
   </>
 );

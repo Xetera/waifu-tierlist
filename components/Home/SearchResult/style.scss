@@ -1,0 +1,47 @@
+@import "../variables";
+.thumbnailWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #aeaeae;
+}
+
+.thin {
+  font-weight: 300;
+}
+
+.gray {
+  color: dimgray;
+}
+
+.info {
+  font-size: 14px;
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottomText {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.thumbnail {
+  max-width: 70px;
+}
+
+.container {
+  margin: 0 auto;
+  display: grid;
+  width: $search-width;
+  grid-template-columns: 70px auto;
+}

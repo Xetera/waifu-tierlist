@@ -1,10 +1,8 @@
 import * as React from "react";
-import { get } from "../../utils/http";
-import { DebounceInput } from "react-debounce-input";
-import { withToggle } from "../../utils/helpers";
-import Input from "@material-ui/core/Input";
 import css from "./style.scss";
-import SearchResult from "components/SearchResult";
+import { SearchBar, SearchResult } from ".";
+import { withToggle } from "../../utils/helpers";
+import { get } from "../../utils/http";
 
 const NoResults = ({ search }: { search: string }) => (
   <div>
@@ -13,13 +11,13 @@ const NoResults = ({ search }: { search: string }) => (
     </p>
   </div>
 );
+
 export default () => {
   const [animes, setAnimes] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  const e = async (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = evt.target;
+  const onNewAnime = async (value: string) => {
     setSearch(value);
     if (value === "") {
       return setAnimes([]);
@@ -33,23 +31,20 @@ export default () => {
 
   const isSearchEmpty = search === "";
 
-  const animeResults = animes.map(({ thumbnail, title }) => (
-    <SearchResult thumbnail={thumbnail} title={title} />
-  ));
+  const animeResults = (
+    <div className={css.resultsContainer}>
+      {animes.map(props => (
+        <SearchResult {...props} />
+      ))}
+    </div>
+  );
 
   return (
-    <>
-      <DebounceInput
-        minLength={2}
-        debounceTimeout={100}
-        onChange={e}
-        placeholder="Search..."
-        // @ts-ignore
-        element={Input}
-      />
+    <div className={css.container}>
+      <SearchBar search={onNewAnime} className={css.searchBar}/>
       {animes.length > 0
         ? animeResults
         : !isSearchEmpty && !loading && <NoResults search={search} />}
-    </>
+    </div>
   );
 };

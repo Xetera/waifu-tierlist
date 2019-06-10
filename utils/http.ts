@@ -1,6 +1,6 @@
 import "isomorphic-fetch";
 
-export const get = (url, opts = {}) => {
+export const get = (url: string, opts = {}) => {
   const endpoint = url.startsWith("/")
     ? `${process.env.WAIFU_TIERLIST_URL}${url}`
     : url;

@@ -6,5 +6,6 @@ node_modules/
 
 # production server output
 dist
+.env
 .idea
 

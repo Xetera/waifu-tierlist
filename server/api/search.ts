@@ -8,4 +8,4 @@ const fuse = new Fuse(database.data, {
   keys: ["title", "synonyms"]
 });
 
-export const searchMal = (query: string) => fuse.search(query);
+export const searchMal = (query: string) => fuse.search(query).slice(0, 10);

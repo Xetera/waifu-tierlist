@@ -9,7 +9,7 @@ const DATABASE_ENDPOINT =
 
 export const init = async () => {
   try {
-    await fs.statSync("./database.json");
+    fs.statSync("./database.json");
     console.log("> database.json already exists, skipping download");
   } catch (_) {
     console.log("> Downloading database.json");

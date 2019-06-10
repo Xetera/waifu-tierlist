@@ -7,6 +7,8 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+console.log(process.env.WAIFU_TIERLIST_URL);
+
 const server = express();
 server.use(router);
 server.get("*", (req, res) => handle(req, res));

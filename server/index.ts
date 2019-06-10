@@ -12,6 +12,9 @@ const handle = app.getRequestHandler();
 
 const server = express();
 server.use(router);
+server.get("/tierlist/:id", (req, res) => {
+  return app.render(req, res, '/tierlist', req.params);
+});
 server.get("*", (req, res) => handle(req, res));
 
 app

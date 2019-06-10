@@ -7,3 +7,6 @@ export const withToggle = async (
   func(false);
   return result;
 };
+
+export const extractAnimeId = (text: string) =>
+  text.split("/").reverse()[0];

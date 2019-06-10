@@ -11,7 +11,7 @@ const setup = config => withImages(withTypescript(withSass(config)));
 module.exports = setup({
   cssModules: true,
   distDir: "dist",
-  publicRuntimeConfig: {
+  env: {
     API_URL: process.env.WAIFU_TIERLIST_URL
   },
   webpack: config => config

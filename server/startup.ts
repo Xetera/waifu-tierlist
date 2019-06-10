@@ -1,4 +1,4 @@
-import { get } from "../utils/http";
+import { get } from "../shared/http";
 import { promisify } from "util";
 import * as fs from "fs";
 

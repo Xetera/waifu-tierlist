@@ -6,11 +6,10 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN npm run build
 
-RUN npm build
-
+# Stage 2
 FROM node:10-alpine
-COPY --from=build /opt/app/node_modules /node_modules
-COPY --from=build /opt/app/dist /dist
+COPY --from=build /opt/app/ /
 
 CMD npm start

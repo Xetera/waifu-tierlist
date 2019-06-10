@@ -2,10 +2,19 @@ import * as React from "react";
 import css from "./style.scss";
 import util from "../../layouts/utility.scss";
 import { SearchBar, SearchResult } from ".";
-import { withToggle } from "../../utils/helpers";
-import { get } from "../../utils/http";
+import { extractAnimeId, withToggle } from "../../shared/helpers";
+import { get } from "../../shared/http";
 import hifumi from "../../assets/hifumi.png";
 import Typography from "@material-ui/core/Typography";
+import { Anime } from "../../shared/types";
+import Link from "next/link";
+
+const generateLinkUrl = (anime: Anime) => {
+  const mal = anime.sources.find(source =>
+    source.includes("myanimelist")
+  ) as string;
+  return `tierlist/${extractAnimeId(mal)}`;
+};
 
 const NoResults = ({ search }: { search: string }) => (
   <div>
@@ -23,7 +32,7 @@ const SearchPrompt = () => (
 );
 
 export default () => {
-  const [animes, setAnimes] = React.useState([]);
+  const [animes, setAnimes] = React.useState<Anime[]>([]);
   const [search, setSearch] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
@@ -42,7 +51,13 @@ export default () => {
   const isSearchEmpty = search === "";
   const hasResults = animes.length > 0;
 
-  const animeResults = animes.map(props => <SearchResult {...props} />);
+  const animeResults = animes.map(anime => (
+    <Link href={generateLinkUrl(anime)}>
+      <a>
+        <SearchResult anime={anime} />
+      </a>
+    </Link>
+  ));
 
   return (
     <div className={css.container}>
@@ -50,6 +65,7 @@ export default () => {
         Waifu Tierlist
       </Typography>
       <SearchBar search={onNewAnime} className={css.searchBar} />
+      {/* TODO: fix this bs */}
       {!hasResults && isSearchEmpty && !loading ? (
         <SearchPrompt />
       ) : (

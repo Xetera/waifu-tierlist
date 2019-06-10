@@ -8,4 +8,5 @@ node_modules/
 dist
 .env
 .idea
-
+database.json
+.env

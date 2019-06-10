@@ -22,7 +22,5 @@ const fuse = new Fuse(animes, {
 
 export const search = (query: string) => {
   const results = fuse.search(query);
-  console.log(results.length);
-  console.log(results[0]);
   return results.slice(0, IMAGE_RESPONSE_LIMIT);
 };

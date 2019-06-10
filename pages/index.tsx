@@ -1,13 +1,18 @@
 import React from "react";
-import { Home } from "../components/Home";
-import Head from "next/head";
+import { Home } from "../components/Home/index";
 import "../layouts/globalStyle.scss";
+import { PageWrapper, Head } from "../layouts";
 
 export default () => (
   <>
-    <Head>
-      <title>Waifu Tierlist</title>
-    </Head>
-    <Home />
+    <Head />
+    <PageWrapper >
+      <Home />
+    </PageWrapper>
+    <style>{`
+      #__next {
+        height: 100%;
+      }
+    `}</style>
   </>
 );

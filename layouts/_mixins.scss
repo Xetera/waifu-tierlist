@@ -1,0 +1,7 @@
+@import "variables";
+
+@mixin on-tablet {
+  @media (min-width: $break-large) {
+    @content
+  }
+}

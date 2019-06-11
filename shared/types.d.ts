@@ -1,5 +1,10 @@
 import { Role } from "jikants/dist/src/interfaces/manga/Characters";
 
+declare module "*.scss" {
+  const content: { [className: string]: string };
+  export default content;
+}
+
 export interface Anime {
   sources: string[];
   type: "TV" | "OVA" | "Music" | "Special" | "Movie" | "ONA";
@@ -10,6 +15,7 @@ export interface Anime {
   episodes?: number;
   synonyms: string[];
 }
+
 export interface AnimeDatabase {
   data: Anime[];
 }

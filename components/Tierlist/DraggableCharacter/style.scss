@@ -1,0 +1,29 @@
+@import "../../../layouts/mixins";
+@import "../variables";
+.character {
+  height: 120px;
+  width: $character-width-sm;
+  @include on-tablet {
+    width: $character-width-lg;
+    height: 150px;
+  }
+  position: relative;
+  border-bottom: 5px purple;
+}
+
+.name {
+  position: absolute;
+  color: gainsboro;
+  font-size: 10px;
+  @include on-tablet {
+    font-size: 12px;
+  }
+  bottom: 0;
+  left: 0;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.characterImage {
+  max-height: 100%;
+}

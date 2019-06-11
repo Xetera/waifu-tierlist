@@ -6,6 +6,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+ENV WAIFU_TIERLIST_URL=https://waifu.hifumi.io
 RUN npm run build
 
 # Stage 2

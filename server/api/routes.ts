@@ -3,7 +3,6 @@ import { searchAnime } from "./searchAnime";
 import { Request, Response } from "express";
 import { getAnimeCharacters } from "./characters";
 import { endpoints } from "../../shared/http";
-const router = Router();
 
 /**
  * Helper wrapper object around express routes for
@@ -20,10 +19,10 @@ const withParam = (param: string) => {
   };
 };
 
+const router = Router();
+
 const sendAnime = withParam("anime");
-
 router.get(endpoints.searchAnime(":anime"), sendAnime(searchAnime));
-
 router.get(endpoints.searchCharacters(":anime"), sendAnime(getAnimeCharacters));
 
 export default router;

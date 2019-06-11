@@ -5,7 +5,6 @@ import { Anime } from "../../../shared/types";
 
 interface Props {
   readonly anime: Anime;
-  // readonly onClick: (evt: Anime) => void;
 }
 
 export default ({ anime }: Props) => {

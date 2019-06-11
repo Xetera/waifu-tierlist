@@ -2,6 +2,9 @@
 @import "../../layouts/mixins";
 
 .container {
+  a {
+    text-decoration: none;
+  }
   display: flex;
   flex-direction: column;
   height: 100%;

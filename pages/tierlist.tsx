@@ -1,11 +1,12 @@
 import * as React from "react";
-
 import { PageWrapper } from "../layouts";
 import { endpoints, get } from "../shared/http";
 import { Characters } from "jikants/dist/src/interfaces/manga/Characters";
 import { Character } from "../shared/types";
-import { CharacterSlider } from "../components/Tierlist";
-import { inspect } from "util";
+import { DragDropContext } from "react-dnd";
+import MultiBackend from "react-dnd-multi-backend";
+import HTML5toTouch from "react-dnd-multi-backend/lib/HTML5toTouch";
+import Tierlist from "../components/Tierlist/Tierlist";
 
 interface Props {
   readonly characters: Character[];
@@ -19,7 +20,7 @@ interface InitialProps {
 
 const TierlistView = ({ characters }: Props) => (
   <PageWrapper>
-    <CharacterSlider characters={characters} />
+    <Tierlist characters={characters} />
   </PageWrapper>
 );
 
@@ -28,8 +29,9 @@ TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   // const { characters } = (await get(
   //   endpoints.searchCharacters(id)
   // )) as Characters;
-  // console.log(characters);
+  // return { characters };
 
+  // test data
   return {
     characters: [
       {
@@ -153,4 +155,5 @@ TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   };
 };
 
-export default TierlistView;
+// @ts-ignore
+export default DragDropContext(MultiBackend(HTML5toTouch))(TierlistView);

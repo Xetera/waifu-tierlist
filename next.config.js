@@ -14,5 +14,11 @@ module.exports = setup({
   env: {
     API_URL: process.env.WAIFU_TIERLIST_URL
   },
-  webpack: config => config
+  publicRuntimeConfig: {
+    API_URL: process.env.WAIFU_TIERLIST_URL
+  },
+  webpack: config => {
+    config.plugins.push(new EnvironmentPlugin(process.env));
+    return config;
+  }
 });

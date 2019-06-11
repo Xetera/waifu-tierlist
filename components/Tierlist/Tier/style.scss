@@ -1,0 +1,46 @@
+@import "../variables";
+
+@import "../../../layouts/mixins.scss";
+
+.tier {
+  display: flex;
+  flex-direction: row;
+  min-height: 120px;
+  @include on-tablet {
+    height: 150px;
+    min-height: 150px;
+  }
+  border-bottom: 1px solid;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tierText {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  @include on-tablet {
+    width: 100px;
+  }
+  text-align: center;
+}
+
+.tierCharacters {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, $character-width-sm);
+  @include on-tablet {
+    grid-template-columns: repeat(auto-fill, $character-width-lg);
+  }
+}
+
+@each $rank, $color in $tiers {
+  .#{$rank} {
+    background-color: $color;
+  }
+}
+

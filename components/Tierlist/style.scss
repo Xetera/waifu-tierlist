@@ -1,3 +1,4 @@
+@import "variables";
 .container {
   display: flex;
   flex-direction: column;
@@ -6,5 +7,12 @@
 }
 
 .scroller {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.unranked {
+  min-height: $tier-height;
+  height: 60%;
   overflow-y: auto;
 }

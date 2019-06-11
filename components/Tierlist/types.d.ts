@@ -7,4 +7,5 @@ export interface Tier {
   readonly sticky?: boolean;
   readonly name: TierName;
   readonly characters?: Character[];
+  readonly className?: string;
 }

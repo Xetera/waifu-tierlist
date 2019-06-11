@@ -8,7 +8,7 @@ import { filterOne } from "../../../shared/helpers";
 
 const getColor = (tier: string) => css[`tier-${tier.toLowerCase()}`];
 
-export default ({ name, characters: initialCharacters = [] }: Tier) => {
+export default ({ name, className, characters: initialCharacters = [] }: Tier) => {
   const [characters, setCharacters] = React.useState<Character[]>(
     initialCharacters
   );
@@ -26,11 +26,12 @@ export default ({ name, characters: initialCharacters = [] }: Tier) => {
   };
 
   const buildComponent = ({ left }: { left: any }) => (
-    <div ref={drop} className={css.tier}>
+    <div ref={drop} className={[css.tier, className].join(' ')}>
       {left}
       <div className={css.tierCharacters}>
         {characters.map(char => (
           <DraggableCharacter
+            key={char.mal_id}
             character={char}
             onEnd={moveCharacter}
           />

@@ -8,9 +8,8 @@ interface Props {
   readonly characters: Character[];
 }
 export default ({ characters }: Props) => {
-  const collected = useDragLayer((e, i) => {
-    return {};
-  });
+  useDragLayer(() => ({}));
+  console.log(characters);
   return (
     <div className={css.container}>
       <div className={css.scroller}>
@@ -21,7 +20,7 @@ export default ({ characters }: Props) => {
         <Tier name="D" total={characters.length}/>
         <Tier name="F" total={characters.length}/>
       </div>
-      <Tier name="Unranked" characters={characters} total={characters.length}/>
+      <Tier name="Unranked" characters={characters} total={characters.length} className={css.unranked}/>
     </div>
   );
 };

@@ -4,6 +4,7 @@
   height: 120px;
   width: $character-width-sm;
   max-width: $character-width-sm;
+  overflow: hidden;
   @include on-tablet {
     width: $character-width-lg;
     max-width: $character-width-lg;
@@ -14,6 +15,7 @@
 }
 $name-padding-w: 10px;
 .name {
+  text-align: center;
   display: inline-block;
   color: gainsboro;
   position: absolute;
@@ -25,12 +27,22 @@ $name-padding-w: 10px;
   left: 0;
   // absolutely positioned things don't respect
   // automatic padding boundary
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   padding: 5px 10px;
   background: rgba(0, 0, 0, 0.5);
 }
 
+.favorite {
+  color: #ff90b3;
+  font-size: 18px !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+}
+
 .characterImage {
-  object-fit: cover;
-  max-width: 100%;
+  object-fit: contain;
+  height: auto;
+  width: 100%;
 }

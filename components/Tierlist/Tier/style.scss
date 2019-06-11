@@ -5,12 +5,12 @@
 .tier {
   display: flex;
   flex-direction: row;
-  min-height: 120px;
+  min-height: $tier-height;
   @include on-tablet {
     height: 150px;
     min-height: 150px;
   }
-  border-bottom: 1px solid;
+  border-bottom: 1px dimgrey solid;
   width: 100%;
   overflow: hidden;
 }
@@ -32,9 +32,9 @@
 .tierCharacters {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, $character-width-sm);
+  grid-template-columns: repeat(auto-fit, $character-width-sm);
   @include on-tablet {
-    grid-template-columns: repeat(auto-fill, $character-width-lg);
+    grid-template-columns: repeat(auto-fit, $character-width-lg);
   }
 }
 

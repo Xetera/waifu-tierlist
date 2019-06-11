@@ -4,9 +4,14 @@ import { endpoints, get } from "../shared/http";
 import { Characters } from "jikants/dist/src/interfaces/manga/Characters";
 import { Character } from "../shared/types";
 import { DragDropContext } from "react-dnd";
-import MultiBackend from "react-dnd-multi-backend";
+import MultiBackend, {
+  TouchTransition,
+  Preview
+} from "react-dnd-multi-backend";
 import HTML5toTouch from "react-dnd-multi-backend/lib/HTML5toTouch";
 import Tierlist from "../components/Tierlist/Tierlist";
+import TouchBackend from "react-dnd-touch-backend";
+import HTML5Backend from "react-dnd-html5-backend";
 
 interface Props {
   readonly characters: Character[];
@@ -18,11 +23,21 @@ interface InitialProps {
   };
 }
 
-const TierlistView = ({ characters }: Props) => (
-  <PageWrapper>
-    <Tierlist characters={characters} />
-  </PageWrapper>
-);
+const TierlistView = ({ characters }: Props) => {
+  const generatePreview = (_type: string, item: Character, style: React.CSSProperties) => {
+    const additional = { height: "50px" };
+    const newStyle = { ...style, ...additional };
+    return <div style={newStyle}>
+      <img src={item.image_url} style={{ height: "100px" }}/>
+    </div>;
+  };
+  return (
+    <PageWrapper>
+      <Preview generator={generatePreview} />
+      <Tierlist characters={characters} />
+    </PageWrapper>
+  );
+};
 
 TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   const { id } = query;
@@ -155,5 +170,19 @@ TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   // };
 };
 
+const config = {
+  backends: [
+    {
+      backend: HTML5Backend
+    },
+    {
+      backend: TouchBackend({ enableMouseEvents: true }),
+      preview: true,
+      transition: TouchTransition,
+      skipDispatchOnTransition: false
+    }
+  ]
+};
+
 // @ts-ignore
-export default DragDropContext(MultiBackend(HTML5toTouch))(TierlistView);
+export default DragDropContext(MultiBackend(config))(TierlistView);

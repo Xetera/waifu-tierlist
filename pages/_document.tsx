@@ -15,6 +15,7 @@ class Html extends Document {
     );
   }
   static async getInitialProps(ctx: any) {
+    // I have absolutely no idea what's going on here
     const sheets = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
     ctx.renderPage = () =>
@@ -26,7 +27,7 @@ class Html extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
-      styles: <>{sheets.getStyleElement()}</>
+      styles: sheets.getStyleElement()
     };
   }
 }

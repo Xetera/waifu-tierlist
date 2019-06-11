@@ -3,6 +3,7 @@ export {
 } from "./DraggableCharacter/DraggableCharacter";
 export { default as TierlistView } from "./Tierlist";
 export { default as Tier } from "./Tier/Tier";
+export { default as Navbar } from "./Navbar/Navbar";
 
 export const types = {
   CHARACTER: "character"

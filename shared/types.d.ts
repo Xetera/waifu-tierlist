@@ -27,3 +27,8 @@ export interface Character {
   readonly role: Role;
   readonly url: string;
 }
+
+export interface CharacterSearchResponse {
+  readonly characters: Character[];
+  readonly anime: Anime;
+}

@@ -1,12 +1,20 @@
 const withTypescript = require("@zeit/next-typescript");
 const withSass = require("@zeit/next-sass");
+const withOffline = require("next-offline");
 const withImages = require("next-images");
 const { EnvironmentPlugin } = require("webpack");
 const { config } = require("dotenv");
 
 config();
 
-const setup = config => withImages(withTypescript(withSass(config)));
+const compose = (...fs) => x => fs.reduce((state, fs) => fs(state), x);
+
+const setup = config => compose(
+  withImages,
+  withTypescript,
+  withSass,
+  withOffline
+)(config);
 
 module.exports = setup({
   cssModules: true,

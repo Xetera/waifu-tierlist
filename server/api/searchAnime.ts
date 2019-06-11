@@ -25,3 +25,10 @@ export const searchAnime = (query: string): Anime[] => {
   const results = fuse.search(query);
   return results.slice(0, IMAGE_RESPONSE_LIMIT);
 };
+
+export const getAnime = (id: string): Anime | undefined => {
+  const pattern = `myanimelist.net/anime/${id}`;
+  return animes.find(anime =>
+    anime.sources.some(source => source.includes(pattern))
+  );
+};

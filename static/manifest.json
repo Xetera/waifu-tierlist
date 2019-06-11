@@ -1,0 +1,15 @@
+{
+  "short_name": "Waifu Tierlist",
+  "name": "Waifu Tierlist",
+  "start_url": "/",
+  "background_color": "#3F51B5",
+  "theme_color": "#b748b5",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/static/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import util from "../../layouts/utility.scss";
 import { SearchBar, SearchResult } from ".";
 import { extractAnimeId, withToggle } from "../../shared/helpers";
 import { get } from "../../shared/http";
-import hifumi from "../../assets/hifumi.png";
+import hifumi from "../../static/hifumi.png";
 import Typography from "@material-ui/core/Typography";
 import { Anime } from "../../shared/types";
 import Link from "next/link";
@@ -27,7 +27,7 @@ const NoResults = ({ search }: { search: string }) => (
 const SearchPrompt = () => (
   <div className={css.searchPrompt}>
     <p className={util.gray}>You're going to put me on S tier... right?</p>
-    <img src={hifumi} className={css.hifumiImage} />
+    <img src="/static/hifumi.png" className={css.hifumiImage} alt="hifumi"/>
   </div>
 );
 

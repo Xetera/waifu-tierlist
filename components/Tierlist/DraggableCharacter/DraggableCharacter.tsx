@@ -9,15 +9,17 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 interface Props<T> {
   readonly character: Character;
+  readonly begin: any;
   readonly onEnd: (payload: T | undefined) => void;
 }
 
 const Badge = () => <Favorite />;
 
-export default ({ character, onEnd }: Props<Character>) => {
+export default ({ character, onEnd, begin }: Props<Character>) => {
   const [, drag] = useDrag({
     item: { id: character.mal_id, type: types.CHARACTER, ...character },
-    end: onEnd
+    end: onEnd,
+    begin
   });
   return (
     <div ref={drag} className={css.character}>

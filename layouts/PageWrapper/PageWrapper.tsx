@@ -3,9 +3,9 @@ import css from "./style.scss";
 import "../globalStyle.scss";
 import { Head } from "..";
 
-export default ({ children }: React.PropsWithChildren<{}>) => (
+export default ({ children, title }: React.PropsWithChildren<{ title?: string }>) => (
   <>
-    <Head />
+    <Head title={title}/>
     <div className={css.wrapper}>{children}</div>
     <style>{`
       #__next {

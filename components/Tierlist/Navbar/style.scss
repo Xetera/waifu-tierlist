@@ -1,0 +1,25 @@
+.divider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  white-space: nowrap;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.section {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.left {
+  @extend .section;
+  max-width: 60%;
+}
+

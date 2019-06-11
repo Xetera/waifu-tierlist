@@ -1,12 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
+import { HeadProps } from "../index";
 
-interface Props {
-  readonly title?: string;
-  readonly image?: string;
-  readonly url?: string;
-  readonly description?: string;
-}
 const defaults = {
   title: "Waifu Tierlist",
   url: "https://waifu.hifumi.io",
@@ -14,7 +9,7 @@ const defaults = {
     "Waifu tierlist maker, generate tier lists of the characters in your favorite anime"
 };
 
-export default ({ title, description, image, url }: Props) => (
+export default ({ title, description, image, url }: HeadProps) => (
   <Head>
     <title>{title || defaults.title}</title>
     <meta charSet="utf-8" />

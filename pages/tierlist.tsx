@@ -13,6 +13,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 import { Navbar } from "../components/Tierlist";
 
 interface Props {
+  readonly id: number;
   readonly characters: Character[];
   readonly anime: Anime;
 }
@@ -23,7 +24,7 @@ interface InitialProps {
   };
 }
 
-const TierlistView = ({ characters, anime }: Props) => {
+const TierlistView = ({ characters, anime, id }: Props) => {
   const generatePreview = (
     _type: string,
     item: Character,
@@ -33,12 +34,17 @@ const TierlistView = ({ characters, anime }: Props) => {
     const newStyle = { ...style, ...additional };
     return (
       <div style={newStyle}>
-        <img src={item.image_url} style={{ height: "100px" }} alt="preview"/>
+        <img src={item.image_url} style={{ height: "100px" }} alt="preview" />
       </div>
     );
   };
   return (
-    <PageWrapper title={`Tierlist | ${anime.title}`}>
+    <PageWrapper
+      title={`Tierlist | ${anime.title}`}
+      description={`Generate a tier list of all the characters in ${anime.title}!`}
+      image={anime.picture}
+      url={`https://waifu.hifumi.io/tierlist/${id}`}
+    >
       <Preview generator={generatePreview} />
       <Tierlist characters={characters} anime={anime} />
     </PageWrapper>
@@ -50,7 +56,7 @@ TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   const { characters, anime } = (await get(
     endpoints.searchCharacters(id)
   )) as CharacterSearchResponse;
-  return { characters, anime };
+  return { characters, anime, id };
 
   // test data
   // return {

@@ -3,27 +3,34 @@
 .character {
   height: 120px;
   width: $character-width-sm;
+  max-width: $character-width-sm;
   @include on-tablet {
     width: $character-width-lg;
+    max-width: $character-width-lg;
     height: 150px;
   }
   position: relative;
   border-bottom: 5px purple;
 }
-
+$name-padding-w: 10px;
 .name {
-  position: absolute;
+  display: inline-block;
   color: gainsboro;
+  position: absolute;
   font-size: 10px;
   @include on-tablet {
     font-size: 12px;
   }
   bottom: 0;
   left: 0;
+  // absolutely positioned things don't respect
+  // automatic padding boundary
+  width: calc(100% - 10px);
   padding: 5px 10px;
   background: rgba(0, 0, 0, 0.5);
 }
 
 .characterImage {
-  max-height: 100%;
+  object-fit: cover;
+  max-width: 100%;
 }

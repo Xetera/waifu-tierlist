@@ -8,7 +8,7 @@ import { filterOne } from "../../../shared/helpers";
 
 const getColor = (tier: string) => css[`tier-${tier.toLowerCase()}`];
 
-export default ({ name, total, characters: initialCharacters = [] }: Tier) => {
+export default ({ name, characters: initialCharacters = [] }: Tier) => {
   const [characters, setCharacters] = React.useState<Character[]>(
     initialCharacters
   );
@@ -17,10 +17,12 @@ export default ({ name, total, characters: initialCharacters = [] }: Tier) => {
     drop: (_, monitor) => setCharacters(prev => [...prev, monitor.getItem()])
   });
 
-  const moveCharacter = (event: Character) => {
-    setCharacters(prev =>
-      filterOne(char => char.mal_id !== event.mal_id, prev)
-    );
+  const moveCharacter = (event?: Character) => {
+    if (event) {
+      setCharacters(prev =>
+        filterOne(char => char.mal_id !== event.mal_id, prev)
+      );
+    }
   };
 
   const buildComponent = ({ left }: { left: any }) => (

@@ -5,10 +5,9 @@
 .tier {
   display: flex;
   flex-direction: row;
-  min-height: $tier-height;
+  min-height: $tier-height-sm;
   @include on-tablet {
-    height: 150px;
-    min-height: 150px;
+    min-height: $tier-height-lg;
   }
   border-bottom: 1px dimgrey solid;
   width: 100%;

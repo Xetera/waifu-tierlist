@@ -5,4 +5,4 @@ workflows:
   build-and-push:
     jobs:
       - docker/publish:
-          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          image: xetera/waifu-tierlist

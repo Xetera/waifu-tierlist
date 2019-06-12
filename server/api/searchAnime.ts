@@ -1,3 +1,4 @@
+// @ts-ignore [not available during compile time]
 import database from "../../database.json";
 import Fuse from "fuse.js";
 import { Anime } from "../../shared/types";

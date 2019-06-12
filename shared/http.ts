@@ -9,5 +9,6 @@ export const get = (url: string, opts = {}) => {
 
 export const endpoints = {
   searchAnime: (id: string) => `/mal/search/${id}`,
-  searchCharacters: (id: string) => `/mal/characters/${id}`
+  searchCharacters: (id: string) => `/mal/characters/${id}`,
+  save: `/save`
 };

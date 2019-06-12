@@ -27,6 +27,7 @@ const withParam = (param: string) => {
 const router = Router();
 
 const sendAnime = withParam("anime");
+
 router.get(endpoints.searchAnime(":anime"), sendAnime(searchAnime));
 router.get(endpoints.searchCharacters(":anime"), sendAnime(async (id) => {
   const anime = getAnime(id);
@@ -39,5 +40,10 @@ router.get(endpoints.searchCharacters(":anime"), sendAnime(async (id) => {
     anime
   }
 }));
+
+router.post(endpoints.save, (req, res) => {
+  console.log(req.body);
+  res.send({})
+});
 
 export default router;

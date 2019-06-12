@@ -42,21 +42,14 @@ export default ({
     }
   };
 
-  const pickUpCharacter = (e: any) => {
-    console.log(e);
-  };
-
   return (
     <div ref={drop} className={[css.tier, className].join(" ")}>
-      {name !== "Unranked" && (
-        <span className={[getColor(name), css.tierText].join(" ")}>{name}</span>
-      )}
+      <span className={[getColor(name), css.tierText].join(" ")}>{name}</span>
       <div className={css.tierCharacters}>
         {characters.map(char => (
           <DraggableCharacter
             key={char.mal_id}
             character={char}
-            begin={pickUpCharacter}
             onEnd={moveCharacter}
           />
         ))}

@@ -1,18 +1,17 @@
-import { Anime, Character } from "../../shared/types";
-import { CharacterSlider, Navbar, Tier } from ".";
+import { Navbar, Tier } from ".";
 import * as React from "react";
 import css from "./style.scss";
 import { useDragLayer } from "react-dnd";
-import { SavedCharacter, TierName } from "./types";
 import CharacterHolder from "./CharacterHolder/CharacterHolder";
+import { TierName } from "./types";
+import { Anime, Character, TierlistState } from "../../shared/types";
+import { endpoints } from "../../shared/http";
 
+export const TIERS: TierName[] = ["S", "A", "B", "C", "D", "F"];
 interface Props {
   readonly characters: Character[];
   readonly anime: Anime;
 }
-
-const tiers: TierName[] = ["S", "A", "B", "C", "D", "F"];
-type TierlistState = { [name in TierName]: Character[] };
 
 const initialState: TierlistState = {
   S: [],
@@ -36,21 +35,42 @@ export default ({ characters, anime }: Props) => {
     }, initialState)
   );
 
-  const onUpdate = (rank: string, chars: SavedCharacter[]) => {
+  const onUpdate = (rank: string, chars: number[]) => {
     setRank(prev => ({
       ...prev,
       [rank]: chars
     }));
   };
 
+  const save = async (name: string) => {
+    console.log(name);
+    console.log(ranks);
+    const req = await fetch(endpoints.save, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        characters: ranks
+      })
+    });
+    const res = await req.json();
+    console.log(res);
+  };
+
   useDragLayer(() => ({}));
-  console.log(characters);
   return (
     <div className={css.container}>
-      <Navbar title={anime.title} />
+      <Navbar title={anime.title} save={save} />
       <div className={css.scroller}>
-        {tiers.map(tier => (
-          <Tier name={tier} total={characters.length} update={onUpdate} />
+        {TIERS.map(tier => (
+          <Tier
+            name={tier}
+            total={characters.length}
+            update={onUpdate}
+            key={tier}
+          />
         ))}
       </div>
       <CharacterHolder

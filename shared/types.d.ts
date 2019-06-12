@@ -1,11 +1,6 @@
 import { Role } from "jikants/dist/src/interfaces/manga/Characters";
 import { TierName } from "../components/Tierlist/types";
 
-declare module "*.scss" {
-  const content: { [className: string]: string };
-  export default content;
-}
-
 export interface Anime {
   sources: string[];
   type: "TV" | "OVA" | "Music" | "Special" | "Movie" | "ONA";
@@ -33,4 +28,11 @@ export interface Character {
 export interface CharacterSearchResponse {
   readonly characters: Character[];
   readonly anime: Anime;
+}
+
+export type TierlistState = { [name in TierName]: Character[] };
+
+export interface SavePayload {
+  readonly name: string;
+  readonly characters: TierlistState;
 }

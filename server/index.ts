@@ -10,6 +10,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const server = express();
+server.use(express.json());
 server.listen(port);
 
 app

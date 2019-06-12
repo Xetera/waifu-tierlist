@@ -10,9 +10,6 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import FavoritesIcon from "@material-ui/icons/Favorite";
 import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
-import Badge from "@material-ui/core/Badge";
-import { Animate } from "react-show";
-import Slide from "@material-ui/core/Slide";
 
 export default ({ characters: initialCharacters = [], update }: any) => {
   const [isOpen, setOpen] = React.useState(true);
@@ -21,7 +18,7 @@ export default ({ characters: initialCharacters = [], update }: any) => {
   );
 
   React.useEffect(() => {
-    update!(name, characters.map(char => char.mal_id));
+    update!("Unranked", characters.map(char => char.mal_id));
   }, [characters]);
 
   const [, drop] = useDrop({

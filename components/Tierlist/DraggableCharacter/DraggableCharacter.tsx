@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Character } from "../../../shared/types";
-import { DragSourceMonitor, useDrag } from "react-dnd";
+import { useDrag } from "react-dnd";
 import { types } from "../index";
 import Favorite from "@material-ui/icons/Favorite";
 import css from "./style.scss";
@@ -12,8 +12,6 @@ interface Props<T> {
   readonly begin: any;
   readonly onEnd: (payload: T | undefined) => void;
 }
-
-const Badge = () => <Favorite />;
 
 export default ({ character, onEnd, begin }: Props<Character>) => {
   const [, drag] = useDrag({

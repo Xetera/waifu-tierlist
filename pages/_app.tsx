@@ -26,4 +26,4 @@ class WaifuTierlist extends App {
   }
 }
 
-export default withGA("UA-196759189", Router)(WaifuTierlist);
+export default withGA("UA-133545986-5", Router)(WaifuTierlist);

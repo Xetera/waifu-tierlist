@@ -11,17 +11,23 @@ const getColor = (tier: string) => css[`tier-${tier.toLowerCase()}`];
 export default ({
   name,
   className,
-  characters: initialCharacters = []
+  characters: initialCharacters = [],
+  update
 }: Tier) => {
   const [characters, setCharacters] = React.useState<Character[]>(
     initialCharacters
   );
+
+  React.useEffect(() => {
+    update(name, characters.map(char => char.mal_id));
+  }, [characters]);
+
   const [, drop] = useDrop({
     accept: types.CHARACTER,
     drop: (e, monitor) => {
       console.log(e);
-      return setCharacters(prev => [...prev, monitor.getItem()])
-    },
+      return setCharacters(prev => [...prev, monitor.getItem()]);
+    }
     // canDrop: (_, monitor) => {
     //   const item: Character = monitor.getItem();
     //   return characters.every(char => char.mal_id !== item.mal_id);

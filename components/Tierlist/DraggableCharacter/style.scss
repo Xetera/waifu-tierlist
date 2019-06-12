@@ -4,10 +4,12 @@
   height: 120px;
   width: $character-width-sm;
   max-width: $character-width-sm;
+  min-width: $character-width-sm;
   overflow: hidden;
   @include on-tablet {
     width: $character-width-lg;
     max-width: $character-width-lg;
+    min-width: $character-width-lg;
     height: 150px;
   }
   position: relative;

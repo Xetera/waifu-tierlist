@@ -5,3 +5,9 @@
     @content
   }
 }
+
+@mixin before-tablet {
+  @media (max-width: $break-large) {
+    @content
+  }
+}

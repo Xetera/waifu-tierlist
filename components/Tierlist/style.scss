@@ -14,10 +14,6 @@
 }
 
 .unranked {
-  min-height: $tier-height-sm;
-  @include on-tablet {
-    min-height: $tier-height-lg;
-  }
   height: 60%;
   overflow-y: auto;
 }

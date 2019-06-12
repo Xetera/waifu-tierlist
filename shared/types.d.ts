@@ -1,4 +1,5 @@
 import { Role } from "jikants/dist/src/interfaces/manga/Characters";
+import { TierName } from "../components/Tierlist/types";
 
 declare module "*.scss" {
   const content: { [className: string]: string };
@@ -26,6 +27,7 @@ export interface Character {
   readonly name: string;
   readonly role: Role;
   readonly url: string;
+  readonly tier?: TierName;
 }
 
 export interface CharacterSearchResponse {

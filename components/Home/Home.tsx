@@ -4,10 +4,10 @@ import util from "../../layouts/utility.scss";
 import { SearchBar, SearchResult } from ".";
 import { extractAnimeId, withToggle } from "../../shared/helpers";
 import { get } from "../../shared/http";
-import hifumi from "../../static/hifumi.png";
 import Typography from "@material-ui/core/Typography";
 import { Anime } from "../../shared/types";
 import Link from "next/link";
+import ReactGithubCorner from "react-github-corner";
 
 const generateLinkUrl = (anime: Anime) => {
   const mal = anime.sources.find(source =>
@@ -52,7 +52,7 @@ export default () => {
   const hasResults = animes.length > 0;
 
   const animeResults = animes.map(anime => (
-    <Link href={generateLinkUrl(anime)}>
+    <Link href={generateLinkUrl(anime)} key={anime.title}>
       <a>
         <SearchResult anime={anime} />
       </a>
@@ -61,6 +61,7 @@ export default () => {
 
   return (
     <div className={css.container}>
+      <ReactGithubCorner href="https://github.com/xetera/waifu-tierlist" />
       <Typography variant="h2" component="h1" className={css.title}>
         Waifu Tierlist
       </Typography>

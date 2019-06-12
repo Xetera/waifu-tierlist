@@ -25,7 +25,7 @@
   },
   "include": [
     "./shared/types.d.ts",
-    "globals.d.ts",
+    "./globals.d.ts",
     "node_modules/@types/node/globals.d.ts"
   ],
   "exclude": ["dist", ".next", "out", "next.config.js"]

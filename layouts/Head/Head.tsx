@@ -19,12 +19,13 @@ export default ({ title, description, image, url }: HeadProps) => (
       key="viewport"
     />
     <meta property="og:type" content="website" />
+    <meta property="og:title" content={title || defaults.title} />
     <meta name="og:site_name" content="Waifu Tierlist" />
     <meta name="description" content={description || defaults.description} />
     <meta name="og:description" content={description || defaults.description} />
     <meta name="og:url" content={url || defaults.url} />
     {image && <meta name="og:image" content={image} />}
-    {url || !title && <link rel="canonical" href={url || defaults.title} />}
+    {url || (!title && <link rel="canonical" href={url || defaults.title} />)}
     <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="manifest" href="/static/manifest.json" />
     <meta name="theme-color" content="#b748b5" />

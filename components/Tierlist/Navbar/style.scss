@@ -1,3 +1,4 @@
+@import "../../../layouts/mixins";
 .divider {
   display: flex;
   flex-direction: row;
@@ -9,7 +10,10 @@
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 16px !important;
+  @include on-tablet {
+    font-size: 22px !important;
+  }
 }
 
 .section {
@@ -20,6 +24,8 @@
 
 .left {
   @extend .section;
-  max-width: 60%;
+  // big hack, trying to not make the style
+  // overflow into the button
+  max-width: 50%;
 }
 

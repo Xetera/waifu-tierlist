@@ -30,7 +30,7 @@ const TierlistView = ({ characters, anime, id }: Props) => {
     item: Character,
     style: React.CSSProperties
   ) => {
-    const additional = { height: "50px" };
+    const additional = { height: "50px", zIndex: 5 };
     const newStyle = { ...style, ...additional };
     return (
       <div style={newStyle}>

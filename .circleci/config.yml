@@ -6,4 +6,5 @@ workflows:
     jobs:
       - docker/publish:
           tag: latest
+          extra_build_args: "--build-arg WAIFU_TIERLIST_DATABASE_URL=$WAIFU_DATABASE_TIERLIST_URL"
           image: xetera/waifu-tierlist

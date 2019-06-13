@@ -1,27 +1,21 @@
 import * as React from "react";
 import { PageWrapper } from "../layouts";
 import { endpoints, get } from "../shared/http";
-import { Anime, Character, CharacterSearchResponse } from "../shared/types";
+import {
+  Anime,
+  Character,
+  CharacterSearchResponse,
+  InitialProps
+} from "../shared/types";
 import { DragDropContext } from "react-dnd";
-import MultiBackend, {
-  TouchTransition,
-  Preview
-} from "react-dnd-multi-backend";
+import MultiBackend, { Preview } from "react-dnd-multi-backend";
 import Tierlist from "../components/Tierlist/Tierlist";
-import TouchBackend from "react-dnd-touch-backend";
-import HTML5Backend from "react-dnd-html5-backend";
-import { Navbar } from "../components/Tierlist";
+import { createDnDContext } from "../shared/helpers";
 
 interface Props {
   readonly id: number;
   readonly characters: Character[];
   readonly anime: Anime;
-}
-
-interface InitialProps {
-  readonly query: {
-    readonly id: string;
-  };
 }
 
 const TierlistView = ({ characters, anime, id }: Props) => {
@@ -41,7 +35,9 @@ const TierlistView = ({ characters, anime, id }: Props) => {
   return (
     <PageWrapper
       title={`Tierlist | ${anime.title}`}
-      description={`Generate a tier list of all the characters in ${anime.title}!`}
+      description={`Generate a tier list of all the characters in ${
+        anime.title
+      }`}
       image={anime.picture}
       url={`https://waifu.hifumi.io/tierlist/${id}`}
     >
@@ -181,20 +177,4 @@ TierlistView.getInitialProps = async ({ query }: InitialProps) => {
   //   ].map(({ voice_actors, ...rest }) => rest)
   // };
 };
-
-const config = {
-  backends: [
-    {
-      backend: HTML5Backend
-    },
-    {
-      backend: TouchBackend({ enableMouseEvents: true }),
-      preview: true,
-      transition: TouchTransition,
-      skipDispatchOnTransition: false
-    }
-  ]
-};
-
-// @ts-ignore
-export default DragDropContext(MultiBackend(config))(TierlistView);
+export default createDnDContext(TierlistView);

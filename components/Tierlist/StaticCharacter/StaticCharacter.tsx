@@ -1,24 +1,11 @@
-import * as React from "react";
-import { Character } from "../../../shared/types";
-import { useDrag } from "react-dnd";
-import { types } from "../index";
-import Favorite from "@material-ui/icons/Favorite";
-import css from "./style.scss";
+import css from "../DraggableCharacter/style.scss";
 import { Icon } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
-
-interface Props<T> {
-  readonly character: Character;
-  readonly onEnd: (payload: T | undefined) => void;
-}
-
-export default ({ character, onEnd }: Props<Character>) => {
-  const [, drag] = useDrag({
-    item: { id: character.mal_id, type: types.CHARACTER, ...character },
-    end: onEnd,
-  });
+import { Favorite } from "@material-ui/icons";
+import { Character } from "../../../shared/types";
+export default ({ character }: { character: Character }) => {
   return (
-    <div ref={drag} className={css.character}>
+    <div className={css.character}>
       {/*<DragPreviewImage src={character.image_url}/>*/}
       <img
         className={css.characterImage}

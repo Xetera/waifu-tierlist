@@ -1,6 +1,6 @@
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import BackIcon from "@material-ui/icons/ArrowBack";
+import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
 import css from "./style.scss";
@@ -15,6 +15,11 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import LinkIcon from "@material-ui/icons/Link";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { withToggle } from "../../../shared/helpers";
+import { endpoints } from "../../../shared/http";
+import Link from "next/link";
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -28,12 +33,27 @@ interface Props {
 export default ({ title, save }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
+  const [waiting, setWaiting] = React.useState(false);
+  const [completed, setCompleted] = React.useState({
+    slideOut: false,
+    slideIn: false,
+    url: ""
+  });
 
   const updateName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setName(evt.target.value);
   };
 
-  const triggerSave = () => save(name);
+  const triggerSave = async () => {
+    setWaiting(true);
+    const response = await withToggle(() => save(name), setWaiting);
+    setCompleted(prev => ({
+      ...prev,
+      slideOut: true,
+      url: `${process.env.API_URL}${endpoints.view(response.url)}`
+    }));
+    setTimeout(() => setCompleted(prev => ({ ...prev, slideIn: true })), 200);
+  };
 
   return (
     <AppBar position="static" color="default">
@@ -43,22 +63,44 @@ export default ({ title, save }: Props) => {
         onClose={() => setOpen(false)}
       >
         <DialogTitle>Save & Share</DialogTitle>
-        <DialogContent>
+        <DialogContent className={css.dialogueBody}>
           <DialogContentText>
             Save and share your current list with your friends. Enter a username
             if you want.
           </DialogContentText>
-          <TextField
-            label="Username"
-            variant="outlined"
-            margin="dense"
-            inputProps={{
-              maxLength: 32
-            }}
-            autoFocus
-            fullWidth={true}
-            onChange={updateName}
-          />
+          {!completed.slideIn && (
+            <Slide direction="right" in={!completed.slideOut}>
+              <TextField
+                label="Username"
+                variant="outlined"
+                margin="dense"
+                inputProps={{
+                  maxLength: 32
+                }}
+                autoFocus
+                fullWidth={true}
+                onChange={updateName}
+              />
+            </Slide>
+          )}
+          <Slide direction="left" in={completed.slideIn}>
+            <div>
+            <>
+              <CopyToClipboard text={completed.url} onCopy={() => Snak}>
+                <Button variant="outlined" size="small">
+                  Copy to clipboard
+                </Button>
+              </CopyToClipboard>
+              <Link>
+                <a
+                  href={completed.url}
+                >
+                  {completed.url}
+                </a>
+              </Link>
+              </>
+            </div>
+          </Slide>
         </DialogContent>
         <DialogActions className={css.actionsOverride}>
           <Button
@@ -67,16 +109,18 @@ export default ({ title, save }: Props) => {
             size="medium"
             onClick={triggerSave}
             href="#"
+            disabled={waiting || completed.slideOut || completed.slideIn}
           >
             Get link
-            <LinkIcon className={css.linkIcon} />
+            {!waiting && <LinkIcon className={css.linkIcon} />}
+            {waiting && <CircularProgress size={20} className={css.linkIcon} />}
           </Button>
         </DialogActions>
       </Dialog>
       <Toolbar className={css.divider}>
         <div className={[css.section, css.left].join(" ")}>
           <IconButton edge="start" aria-label="Back" href="/">
-            <BackIcon />
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" className={css.title}>
             {title}

@@ -30,9 +30,24 @@ export interface CharacterSearchResponse {
   readonly anime: Anime;
 }
 
-export type TierlistState = { [name in TierName]: Character[] };
+export interface SaveLookupResponse {
+  readonly name: string;
+  readonly url: string;
+  readonly characters: Record<string, Character[]>;
+  readonly anime: Anime;
+  readonly animeId: string;
+}
+
+export type TierlistState<T = Character[]> = { [name in TierName]: T };
 
 export interface SavePayload {
   readonly name: string;
   readonly characters: TierlistState;
+  readonly anime: string;
+}
+
+export interface InitialProps {
+  readonly query: {
+    readonly id: string;
+  };
 }

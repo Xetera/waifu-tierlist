@@ -3,6 +3,9 @@ import { getAnime, searchAnime } from "./searchAnime";
 import { Request, Response } from "express";
 import { getAnimeCharacters } from "./characters";
 import { endpoints } from "../../shared/http";
+import { CharacterSearchResponse, SaveLookupResponse, SavePayload } from "../../shared/types";
+import { getSave, save } from "./save";
+import { mapObject } from "../../shared/helpers";
 
 /**
  * Helper wrapper object around express routes for
@@ -29,21 +32,65 @@ const router = Router();
 const sendAnime = withParam("anime");
 
 router.get(endpoints.searchAnime(":anime"), sendAnime(searchAnime));
-router.get(endpoints.searchCharacters(":anime"), sendAnime(async (id) => {
-  const anime = getAnime(id);
-  if (!anime) {
-    return Promise.reject({ error: "anime not found" });
-  }
-  const resp = await getAnimeCharacters(id);
-  return {
-    characters:  resp || [],
-    anime
-  }
-}));
+router.get(
+  endpoints.searchCharacters(":anime"),
+  sendAnime(async (id: string): Promise<CharacterSearchResponse> => {
+    const anime = getAnime(id);
+    if (!anime) {
+      return Promise.reject({ error: "anime not found" });
+    }
+    const resp = await getAnimeCharacters(id);
+    return {
+      characters: resp || [],
+      anime
+    };
+  })
+);
 
-router.post(endpoints.save, (req, res) => {
+router.post(endpoints.save, async (req, res) => {
+  const requiredFields = ["anime", "name", "characters"];
+  const missingField = requiredFields.some(field => !req.body[field]);
+  if (missingField) {
+    return res
+      .status(400)
+      .send({ error: `${missingField} is missing from the body` });
+  }
+  const payload = req.body as SavePayload;
   console.log(req.body);
-  res.send({})
+  const url = await save(payload);
+  res.send({ url });
 });
+
+const sendSave = withParam("saveId");
+
+router.get(
+  endpoints.lookupSave(":saveId"),
+  sendSave(async (url): Promise<SaveLookupResponse> => {
+    try {
+      const { name, animeId, characters } = await getSave(url);
+      const rawCharacters = await getAnimeCharacters(animeId);
+      const anime = getAnime(animeId);
+      if (!anime) {
+        return Promise.reject(`Anime recorded as ${animeId} on a save could not be found in the database`);
+      }
+      const updatedCharacters = mapObject(
+        chars =>
+          chars.map(char =>
+            rawCharacters.find(raw => Number(raw.mal_id) === char)!
+          ),
+        characters
+      );
+      return {
+        url,
+        name,
+        characters: updatedCharacters,
+        anime: anime,
+        animeId
+      }
+    } catch (e) {
+      return Promise.reject("Invalid id");
+    }
+  })
+);
 
 export default router;

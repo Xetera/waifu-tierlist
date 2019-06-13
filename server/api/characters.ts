@@ -1,7 +1,7 @@
 import J from "jikants";
 import { Character } from "../../shared/types";
 
-export const getAnimeCharacters = (id: string | number): Promise<Partial<Character[]>> =>
+export const getAnimeCharacters = (id: string | number): Promise<Character[]> =>
   J.Anime.charactersStaff(Number(id)).then(res => {
     if (!res) {
       return [];

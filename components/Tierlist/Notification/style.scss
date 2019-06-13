@@ -1,0 +1,15 @@
+.notification {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: normal;
+  color: #23231c;
+  padding: 20px;
+  max-width: 100%;
+  background: #70dcd2;
+}
+
+.text {
+  font-size: 14px;
+}

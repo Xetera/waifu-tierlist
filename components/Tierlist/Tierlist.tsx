@@ -6,9 +6,11 @@ import CharacterHolder from "./CharacterHolder/CharacterHolder";
 import { TierName } from "./types";
 import { Anime, Character, TierlistState } from "../../shared/types";
 import { endpoints } from "../../shared/http";
+import { extractAnimeId, mapObject } from "../../shared/helpers";
 
 export const TIERS: TierName[] = ["S", "A", "B", "C", "D", "F"];
 interface Props {
+  readonly draggable: boolean;
   readonly characters: Character[];
   readonly anime: Anime;
 }
@@ -23,7 +25,7 @@ const initialState: TierlistState = {
   Unranked: []
 };
 
-export default ({ characters, anime }: Props) => {
+export default ({ characters, anime, draggable = true }: Props) => {
   const [ranks, setRank] = React.useState<TierlistState>(
     characters.reduce((all, char) => {
       const tier = char.tier || "Unranked";
@@ -35,7 +37,7 @@ export default ({ characters, anime }: Props) => {
     }, initialState)
   );
 
-  const onUpdate = (rank: string, chars: number[]) => {
+  const onUpdate = (rank: string, chars: Character[]) => {
     setRank(prev => ({
       ...prev,
       [rank]: chars
@@ -43,8 +45,10 @@ export default ({ characters, anime }: Props) => {
   };
 
   const save = async (name: string) => {
-    console.log(name);
-    console.log(ranks);
+    // this can't fail
+    const animeSource = anime.sources.find(source =>
+      source.includes("myanimelist")
+    )!;
     const req = await fetch(endpoints.save, {
       method: "POST",
       headers: {
@@ -52,26 +56,26 @@ export default ({ characters, anime }: Props) => {
       },
       body: JSON.stringify({
         name,
-        characters: ranks
+        characters: mapObject(chars => chars.map(char => char.mal_id), ranks),
+        // we can't send anything tha
+        anime: extractAnimeId(animeSource)
       })
     });
     const res = await req.json();
     console.log(res);
+    return res;
   };
 
   useDragLayer(() => ({}));
+
+  const makeTier = (tier: TierName, characters: Character[]) => (
+    <Tier name={tier} total={characters.length} update={onUpdate} key={tier} draggable={draggable}/>
+  );
   return (
     <div className={css.container}>
       <Navbar title={anime.title} save={save} />
       <div className={css.scroller}>
-        {TIERS.map(tier => (
-          <Tier
-            name={tier}
-            total={characters.length}
-            update={onUpdate}
-            key={tier}
-          />
-        ))}
+        {TIERS.map(tier => makeTier(tier, ranks[tier]))}
       </div>
       <CharacterHolder
         characters={characters}

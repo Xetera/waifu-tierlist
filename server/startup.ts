@@ -1,6 +1,16 @@
 import { get } from "../shared/http";
 import { promisify } from "util";
 import * as fs from "fs";
+import mongoose from "mongoose";
+
+const url = process.env.DB_URL || process.env.WAIFU_TIERLIST_MONGODB_URL;
+mongoose
+  .connect(url || "missing mongodb url", { useNewUrlParser: true })
+  .catch(() =>
+    console.log(
+      "> Unable to connect to mongodb, saving functionality will be disabled"
+    )
+  );
 
 const writeFileAsync = promisify(fs.writeFile).bind(fs);
 

@@ -10,7 +10,7 @@
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: 16px !important;
+  font-size: 14px !important;
   @include on-tablet {
     font-size: 22px !important;
   }
@@ -26,7 +26,7 @@
   @extend .section;
   // big hack, trying to not make the style
   // overflow into the button
-  max-width: 50%;
+  max-width: 45%;
 }
 
 .linkIcon {
@@ -37,3 +37,6 @@
   padding: 16px 24px !important;
 }
 
+.dialogueBody {
+  overflow-x: hidden;
+}

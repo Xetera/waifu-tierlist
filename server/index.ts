@@ -11,7 +11,7 @@ const handle = app.getRequestHandler();
 
 const server = express();
 server.use(express.json());
-server.listen(port);
+const listener = server.listen(port);
 
 app
   .prepare()
@@ -25,6 +25,9 @@ app
     server.get("/tierlist/:id", (req, res) => {
       return app.render(req, res, "/tierlist", req.params);
     });
+    server.get("/view/:id", (req, res) => {
+      return app.render(req, res, "/view", req.params);
+    });
     server.get("*", (req, res) => handle(req, res));
 
     // tslint:disable-next-line:no-console
@@ -34,3 +37,7 @@ app
       }`
     );
   });
+
+process.on("SIGTERM", () =>
+  listener.close(() => process.kill(process.pid, "SIGTERM"))
+);

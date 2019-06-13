@@ -11,6 +11,13 @@ import FavoritesIcon from "@material-ui/icons/Favorite";
 import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
+/**
+ * Yes I know this class a duplicate of Tier, but I can't
+ * be bothered to extract the logic to a parent component
+ * also because I don't know how that works with react
+ * @param initialCharacters
+ * @param update
+ */
 export default ({ characters: initialCharacters = [], update }: any) => {
   const [isOpen, setOpen] = React.useState(true);
   const [characters, setCharacters] = React.useState<Character[]>(
@@ -18,7 +25,7 @@ export default ({ characters: initialCharacters = [], update }: any) => {
   );
 
   React.useEffect(() => {
-    update!("Unranked", characters.map(char => char.mal_id));
+    update("Unranked", characters);
   }, [characters]);
 
   const [, drop] = useDrop({

@@ -70,7 +70,7 @@ router.get(
       const rawCharacters = await getAnimeCharacters(animeId);
       const anime = getAnime(animeId);
       if (!anime) {
-        return Promise.reject(`Anime recorded as ${animeId} on a save could not be found in the database`);
+        return Promise.reject({ error: `Anime recorded as ${animeId} on a save could not be found in the database` });
       }
       const updatedCharacters = mapObject(
         chars =>
@@ -87,7 +87,8 @@ router.get(
         animeId
       }
     } catch (e) {
-      return Promise.reject("Invalid id");
+      console.error(e);
+      return Promise.reject({ error: "Invalid id" });
     }
   })
 );

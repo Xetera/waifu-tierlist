@@ -19,7 +19,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { withToggle } from "../../../shared/helpers";
 import { endpoints } from "../../../shared/http";
 import Link from "next/link";
-import { CopyToClipboard } from "react-copy-to-clipboard"
+import FileCopy from "@material-ui/icons/FileCopy";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -65,15 +66,13 @@ export default ({ title, save }: Props) => {
         <DialogTitle>Save & Share</DialogTitle>
         <DialogContent className={css.dialogueBody}>
           <DialogContentText>
-            Save and share your current list with your friends. Enter a username
-            if you want.
+            Save and share your current list with your friends.
           </DialogContentText>
           {!completed.slideIn && (
             <Slide direction="right" in={!completed.slideOut}>
               <TextField
                 label="Username"
                 variant="outlined"
-                margin="dense"
                 inputProps={{
                   maxLength: 32
                 }}
@@ -83,24 +82,22 @@ export default ({ title, save }: Props) => {
               />
             </Slide>
           )}
-          <Slide direction="left" in={completed.slideIn}>
-            <div>
-            <>
-              <CopyToClipboard text={completed.url} onCopy={() => Snak}>
-                <Button variant="outlined" size="small">
-                  Copy to clipboard
-                </Button>
-              </CopyToClipboard>
-              <Link>
-                <a
-                  href={completed.url}
-                >
-                  {completed.url}
-                </a>
-              </Link>
-              </>
-            </div>
-          </Slide>
+          {completed.slideIn && (
+            <Slide direction="left" in={completed.slideIn}>
+              <div className={css.clipboardSlider}>
+                <CopyToClipboard text={completed.url}>
+                  <IconButton>
+                    <FileCopy />
+                  </IconButton>
+                </CopyToClipboard>
+                <Link>
+                  <a href={completed.url} className={css.linkText}>
+                    {completed.url}
+                  </a>
+                </Link>
+              </div>
+            </Slide>
+          )}
         </DialogContent>
         <DialogActions className={css.actionsOverride}>
           <Button
@@ -108,7 +105,6 @@ export default ({ title, save }: Props) => {
             color="primary"
             size="medium"
             onClick={triggerSave}
-            href="#"
             disabled={waiting || completed.slideOut || completed.slideIn}
           >
             Get link

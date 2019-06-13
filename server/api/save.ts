@@ -1,6 +1,7 @@
 import { SavePayload } from "../../shared/types";
 import { ISavedList, SavedList } from "../models/savedList";
 import { getAnime } from "./searchAnime";
+import { MAX_CHAR_COUNT } from "../../shared/helpers";
 
 export const save = async ({ anime, characters, name }: SavePayload) => {
   try {
@@ -13,7 +14,7 @@ export const save = async ({ anime, characters, name }: SavePayload) => {
     const list = new SavedList({
       animeName: animeResult.title,
       animeId: anime,
-      name,
+      name: name ? name.slice(0, MAX_CHAR_COUNT) : "",
       characters
     });
     const { url } = await list.save();

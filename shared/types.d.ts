@@ -41,7 +41,7 @@ export interface SaveLookupResponse {
 export type TierlistState<T = Character[]> = { [name in TierName]: T };
 
 export interface SavePayload {
-  readonly name: string;
+  readonly name?: string;
   readonly characters: TierlistState;
   readonly anime: string;
 }

@@ -33,10 +33,25 @@
   margin-left: 5px;
 }
 
+.linkText {
+  font-size: 12px;
+  word-break: break-word;
+  @include on-tablet {
+    font-size: 16px !important;
+  }
+}
+
 .actionsOverride {
   padding: 16px 24px !important;
 }
 
 .dialogueBody {
   overflow-x: hidden;
+}
+
+
+.clipboardSlider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

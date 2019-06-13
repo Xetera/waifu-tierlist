@@ -11,7 +11,7 @@ const handle = app.getRequestHandler();
 
 const server = express();
 server.use(express.json());
-const listener = server.listen(port);
+server.listen(port);
 
 app
   .prepare()
@@ -37,7 +37,3 @@ app
       }`
     );
   });
-
-process.on("SIGTERM", () =>
-  listener.close(() => process.kill(process.pid, "SIGTERM"))
-);

@@ -8,8 +8,6 @@ import { useDragLayer } from "react-dnd";
 import { createDnDContext } from "../shared/helpers";
 import tierCss from "../components/Tierlist/style.scss";
 import { Typography } from "@material-ui/core";
-import Tooltip from "@material-ui/core/Tooltip";
-import Link from "next/link";
 
 const View = ({
   name,

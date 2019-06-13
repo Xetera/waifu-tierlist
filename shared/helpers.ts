@@ -4,6 +4,8 @@ import { TouchTransition } from "react-dnd-multi-backend";
 import TouchBackend from "react-dnd-touch-backend";
 import MultiBackend from "react-dnd-multi-backend"
 
+export const MAX_CHAR_COUNT = 32;
+
 export const withToggle = async (
   state: () => any,
   func: (b: boolean) => any

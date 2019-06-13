@@ -5,4 +5,5 @@ workflows:
   build-and-push:
     jobs:
       - docker/publish:
+          tag: latest
           image: xetera/waifu-tierlist

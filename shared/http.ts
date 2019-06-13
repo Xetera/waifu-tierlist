@@ -3,7 +3,6 @@ import "isomorphic-fetch";
 export const get = (url: string, opts = {}) => {
   const isRelative = url.startsWith("/");
   const endpoint = isRelative ? `${process.env.API_URL}${url}` : url;
-  console.log(endpoint);
   return fetch(endpoint, opts).then(r => r.json());
 };
 

@@ -62,7 +62,6 @@ export default ({ characters, anime, draggable = true }: Props) => {
       })
     });
     const res = await req.json();
-    console.log(res);
     return res;
   };
 

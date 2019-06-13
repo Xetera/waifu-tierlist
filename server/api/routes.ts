@@ -56,7 +56,6 @@ router.post(endpoints.save, async (req, res) => {
       .send({ error: `${missingField} is missing from the body` });
   }
   const payload = req.body as SavePayload;
-  console.log(req.body);
   const url = await save(payload);
   res.send({ url });
 });

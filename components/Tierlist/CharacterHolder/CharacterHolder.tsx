@@ -34,10 +34,6 @@ export default ({ characters: initialCharacters = [], update }: any) => {
       console.log(e);
       return setCharacters(prev => [...prev, monitor.getItem()]);
     }
-    // canDrop: (_, monitor) => {
-    //   const item: Character = monitor.getItem();
-    //   return characters.every(char => char.mal_id !== item.mal_id);
-    // }
   });
 
   const moveCharacter = (event?: Character) => {
@@ -46,10 +42,6 @@ export default ({ characters: initialCharacters = [], update }: any) => {
         filterOne(char => char.mal_id !== event.mal_id, prev)
       );
     }
-  };
-
-  const pickUpCharacter = (e: any) => {
-    console.log(e);
   };
 
   return (
@@ -61,7 +53,6 @@ export default ({ characters: initialCharacters = [], update }: any) => {
               <DraggableCharacter
                 key={char.mal_id}
                 character={char}
-                begin={pickUpCharacter}
                 onEnd={moveCharacter}
               />
             ))}

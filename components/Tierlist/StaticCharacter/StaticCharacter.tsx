@@ -3,7 +3,7 @@ import { Icon } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Favorite } from "@material-ui/icons";
 import { Character } from "../../../shared/types";
-export default ({ character }: { character: Character }) => {
+const StaticCharacter = ({ character }: { character: Character }) => {
   return (
     <div className={css.character}>
       {/*<DragPreviewImage src={character.image_url}/>*/}
@@ -23,3 +23,5 @@ export default ({ character }: { character: Character }) => {
     </div>
   );
 };
+
+export default StaticCharacter;

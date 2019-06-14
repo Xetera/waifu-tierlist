@@ -20,6 +20,27 @@ class WaifuTierlist extends App {
 
     return (
       <Container>
+        <style>{`
+        .item {
+          z-index: 1;
+          display: block;
+          position: absolute;
+        }
+        .item-content {
+          width: 100%;
+          position: relative;
+          height: 100%;
+        }
+        .item.muuri-item-dragging {
+          z-index: 40;
+        }
+        .item.muuri-item-releasing {
+          z-index: 2;
+        }
+        .item.muuri-item-hidden {
+          z-index: 0;
+        }
+        `}</style>
         <Component {...pageProps} />
       </Container>
     );

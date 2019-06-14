@@ -1,8 +1,4 @@
-import { DragDropContext } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend"
-import { TouchTransition } from "react-dnd-multi-backend";
-import TouchBackend from "react-dnd-touch-backend";
-import MultiBackend from "react-dnd-multi-backend"
+export const muuris: any = {};
 
 export const MAX_CHAR_COUNT = 32;
 
@@ -38,23 +34,6 @@ export const mapObject = <V, R>(
     return {
       ...previous,
       [key]: newValue
-    }
+    };
   }, {});
 };
-
-const config = {
-  backends: [
-    {
-      backend: HTML5Backend
-    },
-    {
-      backend: TouchBackend({ enableMouseEvents: true }),
-      preview: true,
-      transition: TouchTransition,
-      skipDispatchOnTransition: false
-    }
-  ]
-};
-
-// @ts-ignore
-export const createDnDContext = component => DragDropContext(MultiBackend(config))(component);

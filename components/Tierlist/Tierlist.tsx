@@ -1,12 +1,11 @@
 import { Navbar, Tier } from ".";
 import * as React from "react";
 import css from "./style.scss";
-import { useDragLayer } from "react-dnd";
 import CharacterHolder from "./CharacterHolder/CharacterHolder";
 import { TierName } from "./types";
 import { Anime, Character, TierlistState } from "../../shared/types";
 import { endpoints } from "../../shared/http";
-import { extractAnimeId, mapObject } from "../../shared/helpers";
+import { extractAnimeId, mapObject, muuris } from "../../shared/helpers";
 
 export const TIERS: TierName[] = ["S", "A", "B", "C", "D", "F"];
 interface Props {
@@ -25,7 +24,7 @@ const initialState: TierlistState = {
   Unranked: []
 };
 
-export default ({ characters, anime, draggable = true }: Props) => {
+const Tierlist = ({ characters, anime, draggable = true }: Props) => {
   const [ranks, setRank] = React.useState<TierlistState>(
     characters.reduce((all, char) => {
       const tier = char.tier || "Unranked";
@@ -37,18 +36,17 @@ export default ({ characters, anime, draggable = true }: Props) => {
     }, initialState)
   );
 
-  const onUpdate = (rank: string, chars: Character[]) => {
-    setRank(prev => ({
-      ...prev,
-      [rank]: chars
-    }));
-  };
-
   const save = async (name: string) => {
     // this can't fail
     const animeSource = anime.sources.find(source =>
       source.includes("myanimelist")
     )!;
+    console.log(muuris);
+    const characters = mapObject(
+          (muuri: any) => muuri._items.map((char: any) => Number(char._element.dataset.id)),
+          muuris
+        );
+    console.log(characters);
     const req = await fetch(endpoints.save, {
       method: "POST",
       headers: {
@@ -56,7 +54,7 @@ export default ({ characters, anime, draggable = true }: Props) => {
       },
       body: JSON.stringify({
         name,
-        characters: mapObject(chars => chars.map(char => char.mal_id), ranks),
+        characters,
         // we can't send anything tha
         anime: extractAnimeId(animeSource)
       })
@@ -65,22 +63,25 @@ export default ({ characters, anime, draggable = true }: Props) => {
     return res;
   };
 
-  useDragLayer(() => ({}));
-
   const makeTier = (tier: TierName, characters: Character[]) => (
-    <Tier name={tier} total={characters.length} update={onUpdate} key={tier} draggable={draggable}/>
+    <Tier
+      name={tier}
+      characters={ranks[tier]}
+      total={characters.length}
+      key={tier}
+      draggable={draggable}
+    />
   );
+
   return (
     <div className={css.container}>
       <Navbar title={anime.title} save={save} />
       <div className={css.scroller}>
         {TIERS.map(tier => makeTier(tier, ranks[tier]))}
       </div>
-      <CharacterHolder
-        characters={characters}
-        total={characters.length}
-        update={onUpdate}
-      />
+      <CharacterHolder characters={ranks["Unranked"]} />
     </div>
   );
 };
+
+export default Tierlist;

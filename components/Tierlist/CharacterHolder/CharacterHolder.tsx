@@ -1,15 +1,18 @@
 import * as React from "react";
 import { Character } from "../../../shared/types";
-import { useDrop } from "react-dnd";
 import { DraggableCharacter, types } from "../index";
-import { filterOne } from "../../../shared/helpers";
+import { filterOne, muuris, Muuris } from "../../../shared/helpers";
 import css from "./style.scss";
 import { Collapse } from "@material-ui/core";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import FavoritesIcon from "@material-ui/icons/Favorite";
 import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import { useEffect } from "react";
+
+interface CharacterHolder {
+  readonly characters: Character[];
+}
 
 /**
  * Yes I know this class a duplicate of Tier, but I can't
@@ -18,45 +21,30 @@ import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
  * @param initialCharacters
  * @param update
  */
-export default ({ characters: initialCharacters = [], update }: any) => {
-  const [isOpen, setOpen] = React.useState(true);
-  const [characters, setCharacters] = React.useState<Character[]>(
-    initialCharacters
-  );
-
+const CharacterHolder = ({ characters }: CharacterHolder) => {
   React.useEffect(() => {
-    update("Unranked", characters);
-  }, [characters]);
-
-  const [, drop] = useDrop({
-    accept: types.CHARACTER,
-    drop: (e, monitor) => {
-      console.log(e);
-      return setCharacters(prev => [...prev, monitor.getItem()]);
-    }
-  });
-
-  const moveCharacter = (event?: Character) => {
-    if (event) {
-      setCharacters(prev =>
-        filterOne(char => char.mal_id !== event.mal_id, prev)
-      );
-    }
-  };
+    const Muuri = require("muuri");
+    const grid = new Muuri(".character-holder", {
+      dragEnabled: true,
+      dragContainer: document.body,
+      dragSort: () => Object.values(muuris)
+    });
+    grid.on("move", console.log);
+    muuris.Unranked = grid;
+  }, []);
+  const [isOpen, setOpen] = React.useState(true);
 
   return (
-    <div ref={drop} className={css.tier}>
+    <div className={css.tier}>
       <Collapse in={isOpen} className={css.collapse}>
-        <div className={css.swipeSection}>
-          <div className={css.tierCharacters}>
-            {characters.map(char => (
-              <DraggableCharacter
-                key={char.mal_id}
-                character={char}
-                onEnd={moveCharacter}
-              />
-            ))}
-          </div>
+        <div className={[css.tierCharacters, "character-holder"].join(" ")}>
+          {characters.map((char, idx) => (
+            <DraggableCharacter
+              key={char.mal_id}
+              character={char}
+              index={idx}
+            />
+          ))}
         </div>
       </Collapse>
       <BottomNavigation showLabels className={css.bottomDrawer} color="red">
@@ -69,3 +57,4 @@ export default ({ characters: initialCharacters = [], update }: any) => {
     </div>
   );
 };
+export default CharacterHolder;

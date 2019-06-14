@@ -18,6 +18,13 @@ const setup = config => compose(
 
 module.exports = setup({
   cssModules: true,
+  cssLoaderOptions: {
+    importLoaders: 1,
+    localIdentName: "[local]_[hash:base64:3]"
+  },
+  postcssLoaderOptions: {
+    autoprefixer: {}
+  },
   distDir: "dist",
   env: {
     API_URL: process.env.WAIFU_TIERLIST_URL,

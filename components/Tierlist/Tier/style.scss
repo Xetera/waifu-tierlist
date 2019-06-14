@@ -29,12 +29,18 @@
 }
 
 .tierCharacters {
-  display: grid;
+  position: relative;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, $character-width-sm);
+  min-height: $tier-height-sm !important;
   @include on-tablet {
-    grid-template-columns: repeat(auto-fit, $character-width-lg);
+    min-height: $tier-height-lg;
   }
+  //display: grid;
+  //width: 100%;
+  //grid-template-columns: repeat(auto-fit, $character-width-sm);
+  //@include on-tablet {
+  //  grid-template-columns: repeat(auto-fit, $character-width-lg);
+  //}
 }
 
 @each $rank, $color in $tiers {

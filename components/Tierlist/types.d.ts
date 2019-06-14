@@ -6,8 +6,7 @@ export interface Tier {
   readonly draggable?: boolean;
   readonly total: number;
   readonly name: TierName;
-  readonly characters?: Character[];
+  readonly characters: Character[];
   readonly className?: string;
-  readonly update: (rank: string, chars: Character[]) => void;
 }
 

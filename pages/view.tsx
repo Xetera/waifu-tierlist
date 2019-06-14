@@ -4,8 +4,6 @@ import { endpoints, get } from "../shared/http";
 import { InitialProps, SaveLookupResponse } from "../shared/types";
 import { Tier, Notification, ViewNavbar } from "../components/Tierlist";
 import * as React from "react";
-import { useDragLayer } from "react-dnd";
-import { createDnDContext } from "../shared/helpers";
 import tierCss from "../components/Tierlist/style.scss";
 import { Typography } from "@material-ui/core";
 
@@ -16,7 +14,6 @@ const View = ({
   animeId,
   url
 }: SaveLookupResponse) => {
-  useDragLayer(() => ({}));
   return (
     <PageWrapper
       title={`${name}'s Tierlist | ${anime.title}`}
@@ -60,4 +57,4 @@ View.getInitialProps = async ({ query }: InitialProps) => {
   return get(endpoints.lookupSave(id));
 };
 
-export default createDnDContext(View);
+export default View;

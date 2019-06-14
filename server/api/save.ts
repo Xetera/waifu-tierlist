@@ -22,6 +22,7 @@ export const save = async ({ anime, characters, name }: SavePayload) => {
   } catch (e) {
     console.error(`Error saving ${name}'s list`);
     console.error(characters);
+    console.error(e)
     return Promise.reject("Could not save user's list");
   }
 };

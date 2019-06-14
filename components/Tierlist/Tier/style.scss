@@ -31,16 +31,18 @@
 .tierCharacters {
   position: relative;
   width: 100%;
-  min-height: $tier-height-sm !important;
+  min-height: $tier-height-sm;
   @include on-tablet {
     min-height: $tier-height-lg;
   }
-  //display: grid;
-  //width: 100%;
-  //grid-template-columns: repeat(auto-fit, $character-width-sm);
-  //@include on-tablet {
-  //  grid-template-columns: repeat(auto-fit, $character-width-lg);
-  //}
+}
+
+.static {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, $character-width-sm);
+  @include on-tablet {
+    grid-template-columns: repeat(auto-fit, $character-width-lg);
+  }
 }
 
 @each $rank, $color in $tiers {

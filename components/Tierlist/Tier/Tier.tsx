@@ -25,7 +25,7 @@ const Tier = ({ name, className, characters, draggable }: TierType) => {
   return (
     <div className={css.tier}>
       <span className={[getColor(name), css.tierText].join(" ")}>{name}</span>
-        <div className={[css.tierCharacters, name].join(" ")}>
+        <div className={[css.tierCharacters, name, !draggable && css.static].join(" ")}>
           {characters.map((char, idx) =>
             draggable ? (
               <DraggableCharacter

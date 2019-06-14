@@ -31,14 +31,14 @@
   position: relative;
   //display: flex;
   min-height: $tier-height-sm;
-  max-height: $tier-height-sm;
+  max-height: $tier-height-sm * 2;
   width: 90%;
   @include on-tablet {
     width: 100%;
     min-height: $tier-height-lg;
+    max-height: $tier-height-lg * 2.5;
     display: grid;
     height: 100%;
-    width: 100%;
   }
 }
 

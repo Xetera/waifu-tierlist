@@ -25,7 +25,7 @@ export const init = async () => {
   } catch (_) {
     console.log("> Downloading database.json");
     const json = await get(DATABASE_ENDPOINT);
-    await writeFileAsync(DOWNLOAD_LOCATION, JSON.stringify(json));
+    fs.writeFileSync(DOWNLOAD_LOCATION, JSON.stringify(json));
     console.log("> Download finished!");
   }
 };

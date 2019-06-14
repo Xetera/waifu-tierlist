@@ -18,10 +18,9 @@ app
   .then(init)
   // importing async to allow init to check
   // database.json first
-  .then(() => import("./api/routes"))
-  .then(router => {
+  .then(() => {
     // @ts-ignore
-    server.use(router.default);
+    server.use(require("./api/routes").default);
     server.get("/tierlist/:id", (req, res) => {
       return app.render(req, res, "/tierlist", req.params);
     });

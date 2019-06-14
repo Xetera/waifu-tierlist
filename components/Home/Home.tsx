@@ -1,7 +1,7 @@
 import * as React from "react";
 import css from "./style.scss";
 import util from "../../layouts/utility.scss";
-import { SearchBar, SearchResult } from ".";
+import { SavedLists, SearchBar, SearchResult } from ".";
 import { extractAnimeId, withToggle } from "../../shared/helpers";
 import { get } from "../../shared/http";
 import Typography from "@material-ui/core/Typography";
@@ -27,7 +27,7 @@ const NoResults = ({ search }: { search: string }) => (
 const SearchPrompt = () => (
   <div className={css.searchPrompt}>
     <p className={util.gray}>You're going to put me on S tier... right?</p>
-    <img src="/static/hifumi.png" className={css.hifumiImage} alt="hifumi"/>
+    <img src="/static/hifumi.png" className={css.hifumiImage} alt="hifumi" />
   </div>
 );
 
@@ -35,6 +35,11 @@ export default () => {
   const [animes, setAnimes] = React.useState<Anime[]>([]);
   const [search, setSearch] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [saved, setSaved] = React.useState([]);
+
+  React.useEffect(() => {
+    setSaved(JSON.parse(localStorage.getItem("saves") || "[]"));
+  }, []);
 
   const onNewAnime = async (value: string) => {
     setSearch(value);
@@ -62,13 +67,19 @@ export default () => {
   return (
     <div className={css.container}>
       <ReactGithubCorner href="https://github.com/xetera/waifu-tierlist" />
-      <Typography variant="h2" component="h1" className={css.title}>
-        Waifu Tierlist
-      </Typography>
-      <SearchBar search={onNewAnime} className={css.searchBar} />
+      <div className={css.top}>
+        <img src="/static/waifu.jpg" className={css.banner} />
+        <div className={css.overlay} />
+        <div className={css.topContent}>
+          <Typography variant="h2" component="h1" className={css.title}>
+            Waifu Tierlist
+          </Typography>
+          <SearchBar search={onNewAnime} className={css.searchBar} />
+        </div>
+      </div>
       {/* TODO: fix this bs */}
       {!hasResults && isSearchEmpty && !loading ? (
-        <SearchPrompt />
+        <SavedLists saves={saved} />
       ) : (
         <div className={css.resultsContainer}>
           {hasResults

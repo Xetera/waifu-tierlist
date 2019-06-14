@@ -7,7 +7,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 interface Props {
   readonly character: Character;
-  readonly index: number;
 }
 
 const DraggableCharacter = ({ character }: Props) => {

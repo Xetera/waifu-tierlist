@@ -1,6 +1,7 @@
 @import "../../../layouts/mixins";
 @import "../variables";
 .character {
+  cursor: grab;
   height: 120px;
   width: $character-width-sm;
   max-width: $character-width-sm;

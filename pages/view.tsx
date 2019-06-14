@@ -27,25 +27,32 @@ const View = ({
           <Notification>
             <Typography component="h3">
               You are viewing{" "}
-              <span className={tierCss.thin} style={{ lineBreak: "break-all" }}>
-              {name || "An anonymous user's"}
-            </span>
+              {name ? (
+                <span
+                  className={tierCss.thin}
+                  style={{ lineBreak: "break-all" }}
+                >
+                  {name}
+                </span>
+              ) : (
+                "an anonymous user"
+              )}
               's tierlist
             </Typography>
           </Notification>
-        {TIERS.map(tier => {
-          const tierChars = characters[tier];
-          return (
-            <Tier
-              draggable={false}
-              characters={tierChars}
-              name={tier}
-              key={tier}
-              total={tierChars.length}
-              update={() => {}}
-            />
-          );
-        })}
+          {TIERS.map(tier => {
+            const tierChars = characters[tier];
+            return (
+              <Tier
+                draggable={false}
+                characters={tierChars}
+                name={tier}
+                key={tier}
+                total={tierChars.length}
+                update={() => {}}
+              />
+            );
+          })}
         </div>
       </div>
     </PageWrapper>

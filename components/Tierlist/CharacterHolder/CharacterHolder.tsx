@@ -1,14 +1,13 @@
 import * as React from "react";
 import { Character } from "../../../shared/types";
-import { DraggableCharacter, types } from "../index";
-import { filterOne, muuris, Muuris } from "../../../shared/helpers";
+import { DraggableCharacter } from "../index";
+import { muuris } from "../../../shared/helpers";
 import css from "./style.scss";
 import { Collapse } from "@material-ui/core";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import ArrowUp from "@material-ui/icons/KeyboardArrowUp";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
-import { useEffect } from "react";
 
 interface CharacterHolder {
   readonly characters: Character[];
@@ -22,13 +21,20 @@ interface CharacterHolder {
  * @param update
  */
 const CharacterHolder = ({ characters }: CharacterHolder) => {
+  const [s, ss] = React.useState(false);
   React.useEffect(() => {
     const Muuri = require("muuri");
     const grid = new Muuri(".character-holder", {
       dragEnabled: true,
+      layout: {
+        horizontal: window.innerWidth < 614
+      },
+      dragSortInterval: 150,
       dragContainer: document.body,
       dragSort: () => Object.values(muuris)
     });
+    ss(true);
+    grid.synchronize();
     muuris.Unranked = grid;
   }, []);
   const [isOpen, setOpen] = React.useState(true);
@@ -36,14 +42,15 @@ const CharacterHolder = ({ characters }: CharacterHolder) => {
   return (
     <div className={css.tier}>
       <Collapse in={isOpen} className={css.collapse}>
-        <div className={[css.tierCharacters, "character-holder"].join(" ")}>
-          {characters.map((char, idx) => (
-            <DraggableCharacter
-              key={char.mal_id}
-              character={char}
-              index={idx}
-            />
-          ))}
+        <div className={css.swipeSection}>
+          <div className={[css.tierCharacters, "character-holder"].join(" ")}>
+            {characters.map((char) => (
+              <DraggableCharacter
+                key={char.mal_id}
+                character={char}
+              />
+            ))}
+          </div>
         </div>
       </Collapse>
       <BottomNavigation showLabels className={css.bottomDrawer} color="red">

@@ -48,7 +48,7 @@ router.get(
 );
 
 router.post(endpoints.save, async (req, res) => {
-  const requiredFields = ["anime", "name", "characters"];
+  const requiredFields = ["anime", "characters"];
   const missingField = requiredFields.some(field => !req.body[field]);
   if (missingField) {
     return res

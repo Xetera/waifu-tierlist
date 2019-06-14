@@ -27,6 +27,21 @@
   overflow-x: auto !important;
 }
 
+.swipeSection {
+  @include before-tablet {
+    &:before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      flex-direction: column;
+      font-size: 12px;
+      color: #3c3c3c;
+      content: "Swipe here to scroll"
+    }
+  }
+}
+
 .tierCharacters {
   position: relative;
   //display: flex;
@@ -37,8 +52,6 @@
     width: 100%;
     min-height: $tier-height-lg;
     max-height: $tier-height-lg * 2.5;
-    display: grid;
-    height: 100%;
   }
 }
 

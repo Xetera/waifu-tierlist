@@ -1,5 +1,4 @@
 import { get } from "../shared/http";
-import { promisify } from "util";
 import * as fs from "fs";
 import mongoose from "mongoose";
 
@@ -11,8 +10,6 @@ mongoose
       "> Unable to connect to mongodb, saving functionality will be disabled"
     )
   );
-
-const writeFileAsync = promisify(fs.writeFile).bind(fs);
 
 const DATABASE_ENDPOINT =
   "https://github.com/manami-project/anime-offline-database/blob/master/anime-offline-database.json?raw=true";

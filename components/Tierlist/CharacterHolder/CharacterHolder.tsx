@@ -29,7 +29,6 @@ const CharacterHolder = ({ characters }: CharacterHolder) => {
       dragContainer: document.body,
       dragSort: () => Object.values(muuris)
     });
-    grid.on("move", console.log);
     muuris.Unranked = grid;
   }, []);
   const [isOpen, setOpen] = React.useState(true);

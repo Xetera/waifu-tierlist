@@ -14,10 +14,7 @@ const Tier = ({ name, className, characters, draggable }: TierType) => {
     const grid = new Muuri(`.${name}`, {
       dragEnabled: true,
       dragContainer: document.body,
-      dragSort: () => {
-        console.log(muuris);
-        return Object.values(muuris);
-      }
+      dragSort: () => Object.values(muuris)
     });
     muuris[name] = grid;
   }, []);

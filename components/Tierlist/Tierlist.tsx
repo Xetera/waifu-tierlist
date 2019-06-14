@@ -41,12 +41,10 @@ const Tierlist = ({ characters, anime, draggable = true }: Props) => {
     const animeSource = anime.sources.find(source =>
       source.includes("myanimelist")
     )!;
-    console.log(muuris);
     const characters = mapObject(
           (muuri: any) => muuri._items.map((char: any) => Number(char._element.dataset.id)),
           muuris
         );
-    console.log(characters);
     const req = await fetch(endpoints.save, {
       method: "POST",
       headers: {

@@ -5,11 +5,15 @@ import { DraggableCharacter } from "../index";
 import { Character } from "../../../shared/types";
 import StaticCharacter from "../StaticCharacter/StaticCharacter";
 import { muuris, Muuris } from "../../../shared/helpers";
+import { Simulate } from "react-dom/test-utils";
 
 const getColor = (tier: string) => css[`tier-${tier.toLowerCase()}`];
 
 const Tier = ({ name, className, characters, draggable }: TierType) => {
   React.useEffect(() => {
+    if (!draggable) {
+      return;
+    }
     const Muuri = require("muuri");
     const grid = new Muuri(`.${name}`, {
       dragEnabled: true,

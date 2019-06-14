@@ -21,7 +21,6 @@ interface CharacterHolder {
  * @param update
  */
 const CharacterHolder = ({ characters }: CharacterHolder) => {
-  const [s, ss] = React.useState(false);
   React.useEffect(() => {
     const Muuri = require("muuri");
     const grid = new Muuri(".character-holder", {
@@ -33,8 +32,9 @@ const CharacterHolder = ({ characters }: CharacterHolder) => {
       dragContainer: document.body,
       dragSort: () => Object.values(muuris)
     });
-    ss(true);
-    grid.synchronize();
+    window.addEventListener("load", () => {
+      grid.refreshItems().layout();
+    });
     muuris.Unranked = grid;
   }, []);
   const [isOpen, setOpen] = React.useState(true);

@@ -45,6 +45,7 @@ const Tierlist = ({ characters, anime, draggable = true }: Props) => {
           (muuri: any) => muuri._items.map((char: any) => Number(char._element.dataset.id)),
           muuris
         );
+
     const req = await fetch(endpoints.save, {
       method: "POST",
       headers: {

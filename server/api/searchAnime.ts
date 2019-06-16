@@ -28,8 +28,8 @@ export const searchAnime = (query: string): Anime[] => {
 };
 
 export const getAnime = (id: string): Anime | undefined => {
-  const pattern = `myanimelist.net/anime/${id}`;
+  const pattern = new RegExp(`myanimelist.net/anime/${id}$`);
   return animes.find(anime =>
-    anime.sources.some(source => source.includes(pattern))
+    anime.sources.some(source => pattern.test(source))
   );
 };

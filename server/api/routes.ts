@@ -75,7 +75,10 @@ router.get(
       const updatedCharacters = mapObject(
         chars =>
           chars.map(char =>
-            rawCharacters.find(raw => Number(raw.mal_id) === char)!
+            rawCharacters.find(raw => {
+              console.log(raw);
+              return Number(raw.mal_id) === char
+            })!
           ),
         characters
       );

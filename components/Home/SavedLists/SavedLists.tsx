@@ -2,7 +2,7 @@ import * as React from "react";
 import { Save } from "../index";
 import Box from "@material-ui/core/Box";
 import css from "./style.scss";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import ListIcon from "@material-ui/icons/List";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";

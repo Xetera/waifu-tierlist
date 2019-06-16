@@ -2,7 +2,7 @@ import * as React from "react";
 import { Character } from "../../../shared/types";
 import Favorite from "@material-ui/icons/Favorite";
 import css from "./style.scss";
-import { Icon } from "@material-ui/core";
+import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
 
 interface Props {

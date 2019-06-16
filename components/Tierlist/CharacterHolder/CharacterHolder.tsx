@@ -3,7 +3,7 @@ import { Character } from "../../../shared/types";
 import { DraggableCharacter } from "../index";
 import { muuris } from "../../../shared/helpers";
 import css from "./style.scss";
-import { Collapse } from "@material-ui/core";
+import Collapse from "@material-ui/core/Collapse";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import ArrowUp from "@material-ui/icons/KeyboardArrowUp";

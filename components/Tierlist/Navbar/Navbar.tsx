@@ -2,7 +2,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import css from "./style.scss";
 import Dialog from "@material-ui/core/Dialog";
 import * as React from "react";

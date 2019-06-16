@@ -1,6 +1,6 @@
 import * as React from "react";
 import css from "./style.scss";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 interface Props {

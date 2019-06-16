@@ -1,4 +1,4 @@
-import { AppBar } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
 import base from "../Navbar/style.scss";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";

@@ -1,7 +1,7 @@
 import css from "../DraggableCharacter/style.scss";
-import { Icon } from "@material-ui/core";
+import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
-import { Favorite } from "@material-ui/icons";
+import Favorite from "@material-ui/icons/Favorite";
 import { Character } from "../../../shared/types";
 const StaticCharacter = ({ character }: { character: Character }) => {
   return (

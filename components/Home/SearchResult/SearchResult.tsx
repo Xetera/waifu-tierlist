@@ -1,6 +1,6 @@
 import * as React from "react";
 import css from "./style.scss";
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import { Anime } from "../../../shared/types";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";

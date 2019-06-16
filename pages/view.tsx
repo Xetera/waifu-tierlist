@@ -5,7 +5,7 @@ import { InitialProps, SaveLookupResponse } from "../shared/types";
 import { Tier, Notification, ViewNavbar } from "../components/Tierlist";
 import * as React from "react";
 import tierCss from "../components/Tierlist/style.scss";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const View = ({
   name,

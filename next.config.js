@@ -2,6 +2,7 @@ const withTypescript = require("@zeit/next-typescript");
 const withSass = require("@zeit/next-sass");
 const withOffline = require("next-offline");
 const withImages = require("next-images");
+const withBundleAnalyzer = require("@next/bundle-analyzer");
 const { EnvironmentPlugin } = require("webpack");
 const { config } = require("dotenv");
 
@@ -12,6 +13,7 @@ const compose = (...fs) => x => fs.reduce((state, fs) => fs(state), x);
 const setup = config => compose(
   withImages,
   withTypescript,
+  withBundleAnalyzer({ enabled: Boolean(process.env.ANALYZE) }),
   withSass,
   withOffline
 )(config);

@@ -1,8 +1,22 @@
 .searchBar {
-  min-width: 50%;
-  max-width: 80%;
+  height: 34px;
+  width: 100%;
   padding: 5px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background: gainsboro;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  background: white;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  width: 100%;
+}
+
+.icon {
+  width: 26px !important;
+  height: 26px !important;
+  margin: 0 8px;
 }

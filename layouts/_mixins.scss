@@ -6,6 +6,12 @@
   }
 }
 
+@mixin on-desktop {
+  @media (min-width: 916px) {
+    @content
+  }
+}
+
 @mixin before-tablet {
   @media (max-width: $break-large) {
     @content

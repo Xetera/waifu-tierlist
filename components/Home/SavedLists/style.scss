@@ -1,10 +1,7 @@
 @import "../../../layouts/mixins";
 .save {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @include on-tablet {
-
-  }
+  padding: 15px;
+}
+.label {
+  font-size: 24px;
 }

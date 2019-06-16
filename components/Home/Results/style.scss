@@ -1,0 +1,27 @@
+@import "../../../layouts/variables";
+@import "../../../layouts/mixins";
+
+.container {
+  margin: 10px 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.label {
+  color: #3F3E3E;
+  font-size: 14px;
+}
+
+.labels {
+  margin: 0 auto !important;
+  padding: 5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  @include on-tablet {
+    width: 80%;
+  }
+}
+

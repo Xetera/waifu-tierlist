@@ -31,7 +31,6 @@ module.exports = setup({
     DB_URL: process.env.WAIFU_TIERLIST_MONGODB_URL
   },
   webpack: config => {
-    config.plugins.push(new EnvironmentPlugin(process.env));
     return config;
   }
 });

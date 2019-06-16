@@ -28,7 +28,7 @@ export default ({ title, description, image, url }: HeadProps) => (
     {url || (!title && <link rel="canonical" href={url || defaults.title} />)}
     <link rel="icon" type="image/png" href="/static/favicon_small.png" />
     <link rel="manifest" href="/static/manifest.json" />
-    <meta name="theme-color" content="#b748b5" />
+    <meta name="theme-color" content="#2196f3" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
   </Head>
 );

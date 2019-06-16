@@ -65,13 +65,17 @@
 }
 
 .container {
-  padding: 5px;
   min-height: 90px;
   max-height: 100%;
   display: grid;
   grid-template-columns: 70px auto;
+  padding: 5px;
+  width: 100%;
 }
-
+.resultWrapper {
+  display: flex;
+  align-items: center;
+}
 .icons a,
 .icons {
   display: flex;

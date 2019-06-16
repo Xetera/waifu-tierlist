@@ -39,35 +39,35 @@ const generateLinkUrl = (anime: Anime) => {
 
 export default ({ anime }: Props) => {
   return (
-    <Paper elevation={3}>
-      <a href={generateLinkUrl(anime)} className={css.container} >
-        <div className={css.thumbnailWrapper}>
-          <img src={anime.picture} className={css.thumbnail} />
-        </div>
-        <div className={css.info}>
-          <Typography component="div" className={css.top}>
-            <Box className={css.title}>{anime.title}</Box>
-            <Box className={css.type}>{anime.type}</Box>
-          </Typography>
-          <Typography className={css.bottom}>
-            <Box className={css.episodes}>
-              {anime.episodes || "Unknown"} episode
-              {anime.episodes ? anime.episodes > 1 && "s" : ""}
-            </Box>
-            <div className={css.icons}>
-              {anime.sources.reduce(
-                (all, source) => {
-                  const result = toIconElem(source);
-                  if (!result) {
-                    return all;
-                  }
-                  return [...all, result];
-                },
-                [] as JSX.Element[]
-              )}
-            </div>
-          </Typography>
-        </div>
+    <Paper elevation={3} className={css.resultWrapper}>
+      <a href={generateLinkUrl(anime)} className={css.container}>
+          <div className={css.thumbnailWrapper}>
+            <img src={anime.picture} className={css.thumbnail} />
+          </div>
+          <div className={css.info}>
+            <Typography component="div" className={css.top}>
+              <Box className={css.title}>{anime.title}</Box>
+              <Box className={css.type}>{anime.type}</Box>
+            </Typography>
+            <Typography className={css.bottom}>
+              <Box className={css.episodes}>
+                {anime.episodes || "Unknown"} episode
+                {anime.episodes ? anime.episodes > 1 && "s" : ""}
+              </Box>
+              <div className={css.icons}>
+                {anime.sources.reduce(
+                  (all, source) => {
+                    const result = toIconElem(source);
+                    if (!result) {
+                      return all;
+                    }
+                    return [...all, result];
+                  },
+                  [] as JSX.Element[]
+                )}
+              </div>
+            </Typography>
+          </div>
       </a>
     </Paper>
   );

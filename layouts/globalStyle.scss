@@ -1,5 +1,13 @@
-span, h1, h2, h3, h4, h5, h6, p, div {
-  font-family: "Lato", "Roboto", sans-serif;
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  font-family: "Lato", "Roboto", sans-serif !important;
 }
 body {
   padding: 0;
@@ -7,6 +15,3 @@ body {
   height: 100%;
   width: 100%;
 }
-
-
-

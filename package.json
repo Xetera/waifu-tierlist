@@ -18,7 +18,7 @@
     "hammerjs": "^2.0.8",
     "isomorphic-fetch": "^2.2.1",
     "jikants": "^1.2.8",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.15",
     "mongoose": "^5.5.15",
     "muuri": "^0.7.1",
     "next": "^8.1.0",

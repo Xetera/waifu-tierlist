@@ -62,7 +62,6 @@ const View = ({
 View.getInitialProps = async ({ query }: InitialProps) => {
   const { id } = query;
   const e = await get(endpoints.lookupSave(id));
-  console.log(e);
   return e;
 };
 

@@ -1,5 +1,5 @@
 // @ts-ignore [not available during compile time]
-import database from "../../database.json";
+// import database from "../../database.json";
 import Fuse from "fuse.js";
 import { Anime } from "../../shared/types";
 
@@ -13,23 +13,31 @@ const filterSearchable = (elems: Anime[]) =>
   elems.filter(elem => elem.sources.some(isValidAnime));
 
 // @ts-ignore
-const animes = filterSearchable(database.data);
+const animes = import("../../database.json").then(database =>
+  // @ts-ignore
+  filterSearchable(database.data)
+);
 
-const fuse = new Fuse<Anime>(animes, {
-  shouldSort: true,
-  threshold: 0.2,
-  maxPatternLength: 32,
-  keys: ["title", "synonyms"]
-});
+const fuse = animes.then(
+  ams =>
+    new Fuse<Anime>(ams, {
+      shouldSort: true,
+      threshold: 0.2,
+      maxPatternLength: 32,
+      keys: ["title", "synonyms"]
+    })
+);
 
-export const searchAnime = (query: string): Anime[] => {
-  const results = fuse.search(query);
+export const searchAnime = async (query: string): Promise<Anime[]> => {
+  const fs = await fuse;
+  const results = fs.search(query);
   return results.slice(0, IMAGE_RESPONSE_LIMIT);
 };
 
-export const getAnime = (id: string): Anime | undefined => {
+export const getAnime = async (id: string): Promise<Anime | undefined> => {
   const pattern = new RegExp(`myanimelist.net/anime/${id}$`);
-  return animes.find(anime =>
+  const ams = await animes;
+  return ams.find((anime: Anime) =>
     anime.sources.some(source => pattern.test(source))
   );
 };

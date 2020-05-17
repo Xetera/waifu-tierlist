@@ -6,9 +6,9 @@ import { MAX_CHAR_COUNT } from "../../shared/helpers";
 export const save = async ({ anime, characters, name }: SavePayload) => {
   try {
     console.log(`Saving tierlist from ${name}`);
-    const animeResult = getAnime(anime);
+    const animeResult = await getAnime(anime);
     if (!animeResult) {
-      return Promise.reject("Invalid anime ID")
+      return Promise.reject("Invalid anime ID");
     }
     const list = new SavedList({
       animeName: animeResult.title,
@@ -21,7 +21,7 @@ export const save = async ({ anime, characters, name }: SavePayload) => {
   } catch (e) {
     console.error(`Error saving ${name}'s list`);
     console.error(characters);
-    console.error(e)
+    console.error(e);
     return Promise.reject("Could not save user's list");
   }
 };
@@ -30,7 +30,6 @@ export const getSave = (url: string): Promise<ISavedList> =>
   SavedList.findOne({
     url
   }).then(async res => {
-    console.log(res);
     if (!res) {
       return Promise.reject("invalid url");
     }

@@ -25,7 +25,7 @@
     "next-ga": "^2.3.4",
     "next-images": "^1.1.1",
     "next-offline": "^4.0.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",

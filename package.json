@@ -21,7 +21,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^5.7.5",
     "muuri": "^0.7.1",
-    "next": "^11.1.0",
+    "next": "^12.1.0",
     "next-ga": "^2.3.4",
     "next-images": "^1.1.1",
     "next-offline": "^4.0.2",

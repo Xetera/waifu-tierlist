@@ -19,7 +19,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jikants": "^1.2.8",
     "lodash": "^4.17.21",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.13.15",
     "muuri": "^0.7.1",
     "next": "^11.1.0",
     "next-ga": "^2.3.4",
